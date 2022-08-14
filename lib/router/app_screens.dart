@@ -1,3 +1,4 @@
 enum AppScreens {
-  welcome
+  welcome,
+  onboarding,
 }
