@@ -1,5 +1,6 @@
 enum AppScreens {
-  welcome,
+  home,
   onboarding,
   login,
+  register,
 }

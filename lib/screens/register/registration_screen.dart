@@ -1,16 +1,14 @@
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
-import 'package:eventry/utils/dimens.dart';
+import 'package:eventry/utils/myFunctions.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../utils/myFunctions.dart';
-
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegistrationScreen extends StatelessWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,7 @@ class LoginScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 30.w
+                horizontal: 30.w
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,12 +33,34 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 30.h),
                 Center(
-                  child: Text('Sign In to your Account',
+                  child: Text('Sign Up for Free',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline6!.copyWith(
                         fontWeight: FontWeight.bold,
                         //color: getTextColor(context)
                     ),
+                  ),
+                ),
+                SizedBox(height: 30.h),
+                const TextField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Enter your name',
+                    //errorText: errorTextPassword,
+                    //border: const OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.person),
+                  ),
+                ),
+                SizedBox(height: 30.h),
+                const TextField(
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Enter your phone',
+                    //errorText: errorTextPassword,
+                    //border: const OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.phone),
                   ),
                 ),
                 SizedBox(height: 30.h),
@@ -66,28 +86,18 @@ class LoginScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.lock),
                   ),
                 ),
-                SizedBox(height: 20.h),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                      onPressed: () {},
-                      child: const Text('Forgot password?')
-                  ),
-                ),
-                SizedBox(height: 15.h),
+                SizedBox(height: 30.h),
                 BtnElevated(
-                    child: const Text('Sign In'),
-                    onPressed: () {
-                      context.go('/${AppScreens.home.toPath}');
-                    }
+                    child: const Text('Sign Up'),
+                    onPressed: () {}
                 ),
                 SizedBox(height: 40.h),
-                const Text("Don't have an account?"),
+                const Text("Already a member?"),
                 TextButton(
                     onPressed: () {
-                      context.go('/${AppScreens.register.toPath}');
+                      context.go('/${AppScreens.login.toPath}');
                     },
-                    child: const Text('Register')
+                    child: const Text('Login')
                 )
               ],
             ),
