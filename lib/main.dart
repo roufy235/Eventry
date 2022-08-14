@@ -30,16 +30,17 @@ class MyApp extends StatelessWidget {
           darkColorScheme = darkDynamic.harmonized();
         } else {
           lightColorScheme = ColorScheme.fromSeed(seedColor: brandColor);
-          darkColorScheme = ColorScheme.fromSeed(seedColor: brandColor, brightness: Brightness.dark);
+          darkColorScheme = ColorScheme.fromSeed(seedColor: brandColorD, brightness: Brightness.dark);
         }
 
         lightColorScheme = ColorScheme.fromSeed(seedColor: brandColor);
-        darkColorScheme = ColorScheme.fromSeed(seedColor: brandColor, brightness: Brightness.dark);
+        darkColorScheme = ColorScheme.fromSeed(seedColor: brandColorD, brightness: Brightness.dark);
 
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: appName,
           theme: ThemeData(
+            scaffoldBackgroundColor: colorWhite,
             useMaterial3: true,
             colorScheme: lightColorScheme,
             elevatedButtonTheme: ElevatedButtonThemeData(
@@ -49,6 +50,14 @@ class MyApp extends StatelessWidget {
                   ),
                   primary: lightColorScheme.primary,
                   onPrimary: lightColorScheme.onPrimary,
+                )
+            ),
+            textButtonTheme: TextButtonThemeData(
+                style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  primary: lightColorScheme.primary,
                 )
             ),
             outlinedButtonTheme: OutlinedButtonThemeData(
@@ -68,6 +77,38 @@ class MyApp extends StatelessWidget {
             textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
           ),
           darkTheme: ThemeData(
+            scaffoldBackgroundColor: brandColorDark,
+            elevatedButtonTheme: ElevatedButtonThemeData(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  primary: brandColorD,
+                  onPrimary: colorWhite,
+                )
+            ),
+            textButtonTheme: TextButtonThemeData(
+                style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  primary: brandColorD,
+                )
+            ),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+                style: OutlinedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  primary: brandColorD,
+                  side: BorderSide(width: 1.0, color: lightColorScheme.primary, style: BorderStyle.solid,),
+                )
+            ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: brandColorDarkFaded,
+              foregroundColor: colorWhite,
+              elevation: 0,
+            ),
             useMaterial3: true,
             colorScheme: darkColorScheme,
             textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).primaryTextTheme),
