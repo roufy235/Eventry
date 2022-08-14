@@ -1,5 +1,6 @@
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
+import 'package:eventry/utils/colors.dart';
 import 'package:eventry/utils/dimens.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
@@ -81,14 +82,92 @@ class LoginScreen extends StatelessWidget {
                       context.go('/${AppScreens.home.toPath}');
                     }
                 ),
-                SizedBox(height: 40.h),
+                SizedBox(height: 20.h),
                 const Text("Don't have an account?"),
                 TextButton(
                     onPressed: () {
                       context.go('/${AppScreens.register.toPath}');
                     },
                     child: const Text('Register')
-                )
+                ),
+                SizedBox(height: 20.h),
+                Center(
+                  child: Text('or continue with',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                SizedBox(height: 25.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child:  InkWell(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: getFadedBgColor(context),
+                            borderRadius: BorderRadius.circular(10.r)
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 12.h,
+                            horizontal: 20.w
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/facebook.png',
+                                width: 22.w,
+                                height: 22.w,
+                              ),
+                              SizedBox(width: 8.h),
+                              Text('Facebook',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10.w),
+                    Expanded(
+                      child:  InkWell(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: getFadedBgColor(context),
+                              borderRadius: BorderRadius.circular(10.r)
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12.h,
+                              horizontal: 20.w
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/google.png',
+                                width: 22.w,
+                                height: 22.w,
+                              ),
+                              SizedBox(width: 8.h),
+                              Text('Google',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30.h),
               ],
             ),
           ),

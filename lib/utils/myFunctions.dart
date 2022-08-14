@@ -9,6 +9,13 @@ Color getBgColor(BuildContext context) {
   return brandColorDark;
 }
 
+Color getFadedBgColor(BuildContext context) {
+  if (Theme.of(context).brightness == Brightness.light) {
+    return brandColorFaded;
+  }
+  return brandColorDarkFaded;
+}
+
 Color getTextColor(BuildContext context) {
   if (Theme.of(context).brightness == Brightness.light) {
     return brandColor;

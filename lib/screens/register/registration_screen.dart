@@ -41,7 +41,7 @@ class RegistrationScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 30.h),
+                SizedBox(height: 25.h),
                 const TextField(
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
@@ -52,7 +52,7 @@ class RegistrationScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.person),
                   ),
                 ),
-                SizedBox(height: 30.h),
+                SizedBox(height: 25.h),
                 const TextField(
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
@@ -63,7 +63,7 @@ class RegistrationScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.phone),
                   ),
                 ),
-                SizedBox(height: 30.h),
+                SizedBox(height: 25.h),
                 const TextField(
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -74,7 +74,7 @@ class RegistrationScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.email),
                   ),
                 ),
-                SizedBox(height: 30.h),
+                SizedBox(height: 25.h),
                 const TextField(
                   keyboardType: TextInputType.text,
                   obscureText: true,
@@ -86,19 +86,97 @@ class RegistrationScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.lock),
                   ),
                 ),
-                SizedBox(height: 30.h),
+                SizedBox(height: 25.h),
                 BtnElevated(
                     child: const Text('Sign Up'),
                     onPressed: () {}
                 ),
-                SizedBox(height: 40.h),
+                SizedBox(height: 30.h),
                 const Text("Already a member?"),
                 TextButton(
                     onPressed: () {
                       context.go('/${AppScreens.login.toPath}');
                     },
                     child: const Text('Login')
-                )
+                ),
+                SizedBox(height: 20.h),
+                Center(
+                  child: Text('or continue with',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                SizedBox(height: 25.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child:  InkWell(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: getFadedBgColor(context),
+                              borderRadius: BorderRadius.circular(10.r)
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12.h,
+                              horizontal: 20.w
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/facebook.png',
+                                width: 22.w,
+                                height: 22.w,
+                              ),
+                              SizedBox(width: 8.h),
+                              Text('Facebook',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10.w),
+                    Expanded(
+                      child:  InkWell(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: getFadedBgColor(context),
+                              borderRadius: BorderRadius.circular(10.r)
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12.h,
+                              horizontal: 20.w
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/google.png',
+                                width: 22.w,
+                                height: 22.w,
+                              ),
+                              SizedBox(width: 8.h),
+                              Text('Google',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30.h),
               ],
             ),
           ),
