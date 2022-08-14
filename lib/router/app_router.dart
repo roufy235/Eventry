@@ -1,6 +1,7 @@
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/screens/home/home_screen.dart';
+import 'package:eventry/screens/interest/interest_screen.dart';
 import 'package:eventry/screens/login/login_screen.dart';
 import 'package:eventry/screens/onboard/onboarding_screen.dart';
 import 'package:eventry/screens/register/registration_screen.dart';
@@ -32,6 +33,11 @@ class AppRouter {
           path: '/${AppScreens.home.toPath}',
           name: AppScreens.home.toName,
           builder: (BuildContext context, GoRouterState state) => const HomeScreen()
+      ),
+      GoRoute(
+          path: '/${AppScreens.interest.toPath}',
+          name: AppScreens.interest.toName,
+          builder: (BuildContext context, GoRouterState state) => const InterestScreen()
       )
     ]
   );

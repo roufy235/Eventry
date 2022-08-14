@@ -69,9 +69,9 @@ class MyApp extends StatelessWidget {
                 side: BorderSide(width: 1.0, color: lightColorScheme.primary, style: BorderStyle.solid,),
               )
             ),
-            appBarTheme: AppBarTheme(
-              backgroundColor: lightColorScheme.primary,
-              foregroundColor: colorWhite,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: colorWhite,
+              //foregroundColor: colorWhite,
               elevation: 0,
             ),
             textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
@@ -105,8 +105,8 @@ class MyApp extends StatelessWidget {
                 )
             ),
             appBarTheme: const AppBarTheme(
-              backgroundColor: brandColorDarkFaded,
-              foregroundColor: colorWhite,
+              backgroundColor: brandColorDark,
+              //foregroundColor: colorWhite,
               elevation: 0,
             ),
             useMaterial3: true,

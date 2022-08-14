@@ -7,6 +7,7 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.onboarding: return 'onboarding';
       case AppScreens.login: return 'login';
       case AppScreens.register: return 'register';
+      case AppScreens.interest: return 'interest';
     }
   }
 
@@ -16,6 +17,7 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.onboarding: return 'onboarding';
       case AppScreens.login: return 'login';
       case AppScreens.register: return 'register';
+      case AppScreens.interest: return 'interest';
     }
   }
 }

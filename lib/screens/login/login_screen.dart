@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                 BtnElevated(
                     child: const Text('Sign In'),
                     onPressed: () {
-                      context.go('/${AppScreens.home.toPath}');
+                      context.go('/${AppScreens.interest.toPath}');
                     }
                 ),
                 SizedBox(height: 20.h),
