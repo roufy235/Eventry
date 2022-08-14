@@ -29,10 +29,7 @@ class InterestScreen extends ConsumerWidget {
     ScreenUtil.init(context);
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
+        leading: null,
         title: const Text('Select your Interest'),
       ),
       body: Padding(

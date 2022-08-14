@@ -22,3 +22,23 @@ Color getTextColor(BuildContext context) {
   }
   return brandColorD;
 }
+
+bool validateString(BuildContext context, String text, String valStr) {
+  if(valStr.isNotEmpty) return true;
+  ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text),
+        duration: const Duration(seconds: 4),
+      )
+  );
+  return false;
+}
+
+void customSnackBar(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text),
+        duration: const Duration(seconds: 4),
+      )
+  );
+}

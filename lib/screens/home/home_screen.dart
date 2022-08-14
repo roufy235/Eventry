@@ -1,3 +1,4 @@
+import 'package:eventry/resource/auth_methods.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,8 +18,10 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             BtnElevated(
-                child: const Text('btn'),
-                onPressed: () {}
+                child: const Text('logout'),
+                onPressed: () {
+                  AuthMethods().logout();
+                }
             )
           ],
         ),

@@ -27,14 +27,14 @@ class MyApp extends StatelessWidget {
         ColorScheme lightColorScheme;
         ColorScheme darkColorScheme;
 
-        if (lightDynamic != null && darkDynamic != null) {
-          lightColorScheme = lightDynamic.harmonized()..copyWith();
-          lightColorScheme = lightColorScheme.copyWith(secondary: brandColor);
-          darkColorScheme = darkDynamic.harmonized();
-        } else {
-          lightColorScheme = ColorScheme.fromSeed(seedColor: brandColor);
-          darkColorScheme = ColorScheme.fromSeed(seedColor: brandColorD, brightness: Brightness.dark);
-        }
+        // if (lightDynamic != null && darkDynamic != null) {
+        //   lightColorScheme = lightDynamic.harmonized()..copyWith();
+        //   lightColorScheme = lightColorScheme.copyWith(secondary: brandColor);
+        //   darkColorScheme = darkDynamic.harmonized();
+        // } else {
+        //   lightColorScheme = ColorScheme.fromSeed(seedColor: brandColor);
+        //   darkColorScheme = ColorScheme.fromSeed(seedColor: brandColorD, brightness: Brightness.dark);
+        // }
 
         lightColorScheme = ColorScheme.fromSeed(seedColor: brandColor);
         darkColorScheme = ColorScheme.fromSeed(seedColor: brandColorD, brightness: Brightness.dark);

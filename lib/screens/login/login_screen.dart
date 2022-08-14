@@ -1,15 +1,36 @@
+import 'package:eventry/resource/auth_methods.dart';
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../utils/myFunctions.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final StateProvider _isLoginBtnLoadingProvider = StateProvider((ref) => 0);
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +64,10 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30.h),
-                const TextField(
+                TextField(
+                  controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Enter your email address',
                     //errorText: errorTextPassword,
@@ -54,10 +76,11 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30.h),
-                const TextField(
+                TextField(
+                  controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Enter your password',
                     //errorText: errorTextPassword,
@@ -74,11 +97,31 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 15.h),
-                BtnElevated(
-                    child: const Text('Sign In'),
-                    onPressed: () {
-                      context.go('/${AppScreens.interest.toPath}');
-                    }
+                Consumer(
+                  builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
+                    int isLoginBtnLoading = ref.watch(_isLoginBtnLoadingProvider.state).state;
+                    return BtnElevated(
+                        isLoading: isLoginBtnLoading == 1 ? true : false,
+                        child: const Text('Sign In'),
+                        onPressed: () async {
+                          String email = _emailController.text;
+                          String password = _passwordController.text;
+                          if (validateString(context, 'email is required', email)) {
+                            if (validateString(context, 'password is required', password)) {
+                              ref.read(_isLoginBtnLoadingProvider.state).state = 1;
+                              String res = await AuthMethods().signInUser(email: email, password: password);
+                              ref.read(_isLoginBtnLoadingProvider.state).state = 0;
+                              if (res != 'success') {
+                                if (!mounted) return;
+                                customSnackBar(context, res);
+                              }
+                            }
+                          }
+
+                          //context.go('/${AppScreens.interest.toPath}');
+                        }
+                    );
+                  }
                 ),
                 SizedBox(height: 20.h),
                 const Text("Don't have an account?"),
