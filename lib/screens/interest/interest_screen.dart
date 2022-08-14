@@ -1,4 +1,6 @@
 import 'package:eventry/models/interest_model.dart';
+import 'package:eventry/router/app_screens.dart';
+import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/states/state.dart';
 import 'package:eventry/utils/colors.dart';
 import 'package:eventry/utils/myFunctions.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 final List<InterestModel> interest = <InterestModel>[
   InterestModel(id: 1, text: 'Art', icon: FontAwesomeIcons.clipboard),
@@ -86,7 +89,9 @@ class InterestScreen extends ConsumerWidget {
             horizontal: 10.w,
           ),
           child: BtnElevated(
-            onPressed: interestIds.isNotEmpty ? () {} : null,
+            onPressed: interestIds.isNotEmpty ? () {
+              context.go('/${AppScreens.home.toPath}');
+            } : null,
             child: const Text('Next'),
           ),
         ),
