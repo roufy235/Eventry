@@ -5,6 +5,7 @@ extension AppScreensExtension on AppScreens {
     switch(this) {
       case AppScreens.welcome: return 'welcome';
       case AppScreens.onboarding: return 'onboarding';
+      case AppScreens.login: return 'login';
     }
   }
 
@@ -12,6 +13,7 @@ extension AppScreensExtension on AppScreens {
     switch(this) {
       case AppScreens.welcome: return 'welcome';
       case AppScreens.onboarding: return 'onboarding';
+      case AppScreens.login: return 'login';
     }
   }
 }

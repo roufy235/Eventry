@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // light theme
-const Color brandColor = Color(0xFF5b6dff);
+const Color brandColor = Color(0xFF586bff);
 const Color brandColorLight = Color(0xFFedefff);
 
 // dark theme

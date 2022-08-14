@@ -110,7 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Text(_next),
                 onPressed: () {
                   if (_models.length == (_pageIndex + 1)) {
-                    context.go('/${AppScreens.welcome.toPath}');
+                    context.go('/${AppScreens.login.toPath}');
                   } else {
                     _controller.nextPage(
                         duration: const Duration(milliseconds: 500),

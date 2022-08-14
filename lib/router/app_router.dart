@@ -1,5 +1,6 @@
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
+import 'package:eventry/screens/login/login_screen.dart';
 import 'package:eventry/screens/onboard/onboarding_screen.dart';
 import 'package:eventry/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,12 @@ class AppRouter {
       GoRoute(
           path: '/${AppScreens.onboarding.toPath}',
           name: AppScreens.onboarding.toName,
-          builder: (BuildContext context, GoRouterState state) => const OnboardingScreen()
+          builder: (BuildContext context, GoRouterState state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: '/${AppScreens.login.toPath}',
+        name: AppScreens.login.toName,
+        builder: (BuildContext context, GoRouterState state) => const LoginScreen(),
       ),
       GoRoute(
           path: '/${AppScreens.welcome.toPath}',
