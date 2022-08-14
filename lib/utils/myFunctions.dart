@@ -2,6 +2,9 @@
 import 'package:eventry/utils/colors.dart';
 import 'package:flutter/material.dart';
 
+const String boxName = 'eventryBox';
+const String boxIsOnboardingViewed = 'isOnboardingViewed';
+
 Color getBgColor(BuildContext context) {
   if (Theme.of(context).brightness == Brightness.light) {
     return colorWhite;

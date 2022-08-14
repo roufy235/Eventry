@@ -5,9 +5,11 @@ import 'package:eventry/screens/interest/interest_screen.dart';
 import 'package:eventry/screens/login/login_screen.dart';
 import 'package:eventry/screens/onboard/onboarding_screen.dart';
 import 'package:eventry/screens/register/registration_screen.dart';
+import 'package:eventry/utils/myFunctions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AppRouter {
   GoRouter get router => _goRouter;
@@ -43,26 +45,53 @@ class AppRouter {
         )
       ],
       redirect: (GoRouterState state) {
+        // login screen
         final loginLocation = state.namedLocation(AppScreens.login.toPath);
         final isGoingLoginLocation = state.subloc == loginLocation.replaceAll('?', '');
 
+        // onboard screen
         final onboardingLocation = state.namedLocation(AppScreens.onboarding.toPath);
         final isGoingOnboardingLocation = state.subloc == onboardingLocation.replaceAll('?', '');
 
+        // home screen
         final homeLocation = state.namedLocation(AppScreens.home.toPath);
         final isGoingHomeLocation = state.subloc == homeLocation.replaceAll('?', '');
+
+        // register screen
+        final registerLocation = state.namedLocation(AppScreens.register.toPath);
+        final isGoingRegisterLocation = state.subloc == registerLocation.replaceAll('?', '');
+
+        // interest screen
+        final interestLocation = state.namedLocation(AppScreens.interest.toPath);
+        //final isGoingInterestLocation = state.subloc == interestLocation.replaceAll('?', '');
 
         User? currentUser = FirebaseAuth.instance.currentUser;
         bool isLoggedIn = currentUser != null;
 
-        if (!isLoggedIn && isGoingHomeLocation) {
-          return loginLocation;
+        if (isLoggedIn) {
+          if (isGoingLoginLocation || isGoingOnboardingLocation) {
+            return homeLocation;
+          }
+
+          if (isGoingRegisterLocation) {
+            return interestLocation;
+          }
         }
 
-        if (isLoggedIn && (isGoingLoginLocation || isGoingOnboardingLocation)) {
-          return homeLocation;
-        }
+        if (!isLoggedIn) {
+          if (isGoingHomeLocation) {
+            return loginLocation;
+          }
 
+          if (isGoingOnboardingLocation) {
+            Box box = Hive.box(boxName);
+            int? value = box.get(boxIsOnboardingViewed);
+            if (value != null && value == 1) {
+              return loginLocation;
+            }
+          }
+
+        }
         return null;
       }
 

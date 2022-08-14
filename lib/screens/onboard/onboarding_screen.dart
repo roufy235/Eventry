@@ -9,6 +9,7 @@ import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -38,6 +39,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
     )
   ];
+
+  final Box _box = Hive.box(boxName);
 
   final PageController _controller = PageController(initialPage: 0);
 
@@ -109,6 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Text(_next),
                 onPressed: () {
                   if (_models.length == (_pageIndex + 1)) {
+                    _box.put(boxIsOnboardingViewed, 1);
                     context.go('/${AppScreens.login.toPath}');
                   } else {
                     _controller.nextPage(
