@@ -1,13 +1,17 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:eventry/firebase_options.dart';
 import 'package:eventry/router/app_router.dart';
 import 'package:eventry/utils/colors.dart';
 import 'package:eventry/utils/dimens.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   runApp(ProviderScope(child: MyApp()));
 }
 

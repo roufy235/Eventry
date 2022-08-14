@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "940728905080",
+    "project_id": "eventryapp-43875",
+    "storage_bucket": "eventryapp-43875.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940728905080:android:2797079478fb49c81aac8d",
+        "android_client_info": {
+          "package_name": "com.eventry.eventry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940728905080-gum9k6qi7d4uon509jcq12hu7hn6qm62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4VGN-WKGMJGEPzNAYqyk8pRwCSRO3410"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940728905080-gum9k6qi7d4uon509jcq12hu7hn6qm62.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "940728905080-pnsb95f4ku4pfsdqkisr9036e2tdv7am.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eventry.eventry"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
