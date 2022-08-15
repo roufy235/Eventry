@@ -54,7 +54,7 @@ class AppRouter {
       redirect: (GoRouterState state) {
         // login screen
         final loginLocation = state.namedLocation(AppScreens.login.toPath);
-        final isGoingLoginLocation = state.subloc == loginLocation.replaceAll('?', '');
+        //final isGoingLoginLocation = state.subloc == loginLocation.replaceAll('?', '');
 
         // onboard screen
         final onboardingLocation = state.namedLocation(AppScreens.onboarding.toPath);
@@ -80,7 +80,11 @@ class AppRouter {
         bool isLoggedIn = currentUser != null;
 
         if (isLoggedIn) {
-          if (isGoingLoginLocation || isGoingOnboardingLocation) {
+          // if (isGoingLoginLocation || isGoingOnboardingLocation) {
+          //   return homeLocation;
+          // }
+
+          if (isGoingOnboardingLocation) {
             return homeLocation;
           }
 

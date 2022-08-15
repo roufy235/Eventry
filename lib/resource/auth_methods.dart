@@ -1,12 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventry/models/firebase/user_model.dart';
+import 'package:eventry/resource/firestore_methods.dart';
 import 'package:eventry/resource/hive_repository.dart';
-import 'package:eventry/utils/my_firebase_firestore_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthMethods {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
   // sign in
   Future<String> signInUser({required String email, required String password}) async {
@@ -14,7 +12,8 @@ class AuthMethods {
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
         UserCredential userCredential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-        //String uid = userCredential.user!.uid;
+        String uid = userCredential.user!.uid;
+        await FirestoreMethods().getUser(uid);
         res = "success";
       } else {
         res = "All fields are required";
@@ -34,7 +33,6 @@ class AuthMethods {
     } catch(err) {
       res = err.toString();
     }
-
     return res;
   }
 
@@ -52,7 +50,7 @@ class AuthMethods {
             email: email,
             uid: authUser?.uid
         );
-        await _firebaseFirestore.collection(userCollectionName).doc(authUser?.uid).set(user.toJson());
+        await FirestoreMethods().addUser(user);
         await HiveRepository().saveUserData(user);
         res = "success";
       } else {

@@ -1,6 +1,6 @@
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
-import 'package:eventry/utils/myFunctions.dart';
+import 'package:eventry/utils/my_functions.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

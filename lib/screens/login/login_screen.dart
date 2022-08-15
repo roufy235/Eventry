@@ -1,4 +1,5 @@
 import 'package:eventry/resource/auth_methods.dart';
+import 'package:eventry/resource/hive_repository.dart';
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../utils/myFunctions.dart';
+import '../../utils/my_functions.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -30,6 +31,15 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    String? recentLoginEmail = HiveRepository().getSaveRecentLoginEmail;
+    if (recentLoginEmail != null) {
+      _emailController.text = recentLoginEmail;
+    }
   }
 
   @override
@@ -109,16 +119,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (validateString(context, 'email is required', email)) {
                             if (validateString(context, 'password is required', password)) {
                               ref.read(_isLoginBtnLoadingProvider.state).state = 1;
-                              String res = await AuthMethods().signInUser(email: email, password: password);
+                              String res = await AuthMethods().signInUser(
+                                  email: email,
+                                  password: password,
+                              );
                               ref.read(_isLoginBtnLoadingProvider.state).state = 0;
-                              if (res != 'success') {
+                              if (res == 'success') {
+                                await HiveRepository().saveRecentLoginEmail(email);
+                                if (!mounted) return;
+                                context.go('/${AppScreens.home.toPath}');
+                              } else {
                                 if (!mounted) return;
                                 customSnackBar(context, res);
                               }
                             }
                           }
-
-                          //context.go('/${AppScreens.interest.toPath}');
                         }
                     );
                   }

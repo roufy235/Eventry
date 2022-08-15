@@ -5,7 +5,7 @@ import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/screens/onboard/dot_indicator.dart';
 import 'package:eventry/screens/onboard/onboarding_layout.dart';
 import 'package:eventry/utils/dimens.dart';
-import 'package:eventry/utils/myFunctions.dart';
+import 'package:eventry/utils/my_functions.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
