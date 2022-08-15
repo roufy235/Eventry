@@ -4,6 +4,7 @@ import 'package:eventry/screens/home/home_screen.dart';
 import 'package:eventry/screens/interest/interest_screen.dart';
 import 'package:eventry/screens/login/login_screen.dart';
 import 'package:eventry/screens/onboard/onboarding_screen.dart';
+import 'package:eventry/screens/register/account_created_screen.dart';
 import 'package:eventry/screens/register/registration_screen.dart';
 import 'package:eventry/utils/myFunctions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,6 +33,13 @@ class AppRouter {
           path: '/${AppScreens.register.toPath}',
           name: AppScreens.register.toName,
           builder: (BuildContext context, GoRouterState state) => const RegistrationScreen(),
+          routes: [
+            GoRoute(
+              path: AppScreens.registerDone.toPath,
+              name: AppScreens.registerDone.toName,
+              builder: (BuildContext context, GoRouterState state) => const AccountCreatedScreen(),
+            )
+          ]
         ),
         GoRoute(
             path: '/${AppScreens.home.toPath}',
@@ -62,7 +70,11 @@ class AppRouter {
         final isGoingRegisterLocation = state.subloc == registerLocation.replaceAll('?', '');
 
         // interest screen
-        final interestLocation = state.namedLocation(AppScreens.interest.toPath);
+        //final interestLocation = state.namedLocation(AppScreens.interest.toPath);
+        //final isGoingInterestLocation = state.subloc == interestLocation.replaceAll('?', '');
+
+        // registration completed screen
+        final registrationCompletedLocation = state.namedLocation(AppScreens.registerDone.toPath);
         //final isGoingInterestLocation = state.subloc == interestLocation.replaceAll('?', '');
 
         User? currentUser = FirebaseAuth.instance.currentUser;
@@ -74,7 +86,7 @@ class AppRouter {
           }
 
           if (isGoingRegisterLocation) {
-            return interestLocation;
+            return registrationCompletedLocation;
           }
         }
 

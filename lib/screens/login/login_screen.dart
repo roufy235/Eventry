@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
                     int isLoginBtnLoading = ref.watch(_isLoginBtnLoadingProvider.state).state;
                     return BtnElevated(
-                        isLoading: isLoginBtnLoading == 1 ? true : false,
+                        isLoading: isLoginBtnLoading == 1,
                         child: const Text('Sign In'),
                         onPressed: () async {
                           String email = _emailController.text;

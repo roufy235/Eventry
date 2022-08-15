@@ -4,4 +4,5 @@ enum AppScreens {
   onboarding,
   login,
   register,
+  registerDone,
 }

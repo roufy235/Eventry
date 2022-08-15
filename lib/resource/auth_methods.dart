@@ -43,14 +43,15 @@ class AuthMethods {
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
         UserCredential userCredential = await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
-        String uid = userCredential.user!.uid;
+        User? authUser = userCredential.user;
+        await authUser?.sendEmailVerification();
         UserModel user = UserModel(
             phone: phone,
             fullName: name,
             email: email,
-            uid: uid
+            uid: authUser?.uid
         );
-        await _firebaseFirestore.collection(userCollectionName).doc(uid).set(user.toJson());
+        await _firebaseFirestore.collection(userCollectionName).doc(authUser?.uid).set(user.toJson());
         res = "success";
       } else {
         res = "All fields are required";

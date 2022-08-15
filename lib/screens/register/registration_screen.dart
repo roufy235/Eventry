@@ -1,14 +1,65 @@
+import 'package:eventry/resource/auth_methods.dart';
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/utils/myFunctions.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
+
+  @override
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final StateProvider _isLoadingProvider = StateProvider<int>((ref) => 0);
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _nameController.dispose();
+    _phoneController.dispose();
+    _passwordController.dispose();
+  }
+
+  void createAccountFunc(WidgetRef ref) async {
+    String name = _nameController.text;
+    String phone = _phoneController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    if (validateString(context, 'name is required', name)) {
+      if (validateString(context, 'phone is required', phone)) {
+        if (validateString(context, 'email is required', email)) {
+          if (validateString(context, 'password is required', password)) {
+            ref.read(_isLoadingProvider.notifier).state = 1;
+            String response = await AuthMethods().createAccount(
+                phone: phone,
+                email: email,
+                password: password,
+                name: name
+            );
+            if (response != 'success') {
+              ref.read(_isLoadingProvider.notifier).state = 0;
+              if (!mounted) return;
+              customSnackBar(context, response);
+            }
+          }
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +93,10 @@ class RegistrationScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 25.h),
-                const TextField(
+                TextField(
+                  controller: _nameController,
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Enter your name',
                     //errorText: errorTextPassword,
@@ -53,9 +105,10 @@ class RegistrationScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 25.h),
-                const TextField(
+                TextField(
+                  controller: _phoneController,
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Enter your phone',
                     //errorText: errorTextPassword,
@@ -64,9 +117,10 @@ class RegistrationScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 25.h),
-                const TextField(
+                TextField(
+                  controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Enter your email address',
                     //errorText: errorTextPassword,
@@ -75,10 +129,11 @@ class RegistrationScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 25.h),
-                const TextField(
+                TextField(
+                  controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Enter your password',
                     //errorText: errorTextPassword,
@@ -87,11 +142,18 @@ class RegistrationScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 25.h),
-                BtnElevated(
-                    child: const Text('Sign Up'),
-                    onPressed: () {}
+                Consumer(
+                  builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
+                    int value = ref.watch(_isLoadingProvider.state).state;
+                    return BtnElevated(
+                      onPressed: () => createAccountFunc(ref),
+                      isLoading: value == 1,
+                      child: const Text('Sign Up'),
+
+                    );
+                  }
                 ),
-                SizedBox(height: 30.h),
+                SizedBox(height: 20.h),
                 const Text("Already a member?"),
                 TextButton(
                     onPressed: () {
@@ -99,7 +161,7 @@ class RegistrationScreen extends StatelessWidget {
                     },
                     child: const Text('Login')
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 10.h),
                 Center(
                   child: Text('or continue with',
                     textAlign: TextAlign.center,
