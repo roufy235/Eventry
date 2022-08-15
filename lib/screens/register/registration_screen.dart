@@ -238,6 +238,36 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ],
                 ),
+                SizedBox(height: 10.h),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: getFadedBgColor(context),
+                        borderRadius: BorderRadius.circular(10.r)
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 12.h,
+                        horizontal: 20.w
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/apple.png',
+                          width: 22.w,
+                          height: 22.w,
+                        ),
+                        SizedBox(width: 8.h),
+                        Text('Apple',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.bold
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
                 SizedBox(height: 30.h),
               ],
             ),

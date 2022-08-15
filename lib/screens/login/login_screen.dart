@@ -1,3 +1,4 @@
+import 'package:eventry/models/firebase/user_model.dart';
 import 'package:eventry/resource/auth_methods.dart';
 import 'package:eventry/resource/hive_repository.dart';
 import 'package:eventry/router/app_screens.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../utils/my_functions.dart';
 
@@ -24,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   final StateProvider _isLoginBtnLoadingProvider = StateProvider((ref) => 0);
-
+  late GoogleSignIn _googleSignIn;
 
   @override
   void dispose() {
@@ -40,6 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
     if (recentLoginEmail != null) {
       _emailController.text = recentLoginEmail;
     }
+    _googleSignIn = GoogleSignIn(
+      clientId: '940728905080-pnsb95f4ku4pfsdqkisr9036e2tdv7am.apps.googleusercontent.com',
+      //serverClientId: ,
+      scopes: [
+        'email',
+        'https://www.googleapis.com/auth/contacts.readonly',
+      ],
+    );
   }
 
   @override
@@ -192,7 +202,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(width: 10.w),
                     Expanded(
                       child:  InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          try {
+                            // : TODO google hasn't verified this app
+                            final response = await _googleSignIn.signIn();
+                          } catch(_) {}
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                               color: getFadedBgColor(context),
@@ -222,6 +237,36 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(height: 10.h),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: getFadedBgColor(context),
+                        borderRadius: BorderRadius.circular(10.r)
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 12.h,
+                        horizontal: 20.w
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/apple.png',
+                          width: 22.w,
+                          height: 22.w,
+                        ),
+                        SizedBox(width: 8.h),
+                        Text('Apple',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.bold
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(height: 30.h),
               ],
