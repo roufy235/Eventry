@@ -1,18 +1,12 @@
+import 'package:eventry/models/hive/user_data_hive.dart';
+import 'package:eventry/resource/hive_repository.dart';
+import 'package:eventry/states/interest_ids_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 
 final interestIdsStateNotifierProvider = StateNotifierProvider<InterestIdsStateNotifier, List<int>>((ref) => InterestIdsStateNotifier());
 
-class InterestIdsStateNotifier extends StateNotifier<List<int>> {
-  InterestIdsStateNotifier(): super([]);
+final userDataProvider = StateProvider<UserDataHive>((ref) {
+  return HiveRepository().getUserData;
+});
 
-  int get totalItem => state.length;
-
-  set updateData(int interestId) {
-    if (!state.contains(interestId)) {
-      state = [...state, interestId];
-    } else {
-      state.remove(interestId);
-      state = [...state];
-    }
-  }
-}

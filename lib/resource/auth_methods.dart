@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventry/models/firebase/user_model.dart';
+import 'package:eventry/resource/hive_repository.dart';
 import 'package:eventry/utils/my_firebase_firestore_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -46,12 +47,13 @@ class AuthMethods {
         User? authUser = userCredential.user;
         await authUser?.sendEmailVerification();
         UserModel user = UserModel(
-            phone: phone,
-            fullName: name,
+            phone: phone.trim(),
+            fullName: name.trim(),
             email: email,
             uid: authUser?.uid
         );
         await _firebaseFirestore.collection(userCollectionName).doc(authUser?.uid).set(user.toJson());
+        await HiveRepository().saveUserData(user);
         res = "success";
       } else {
         res = "All fields are required";

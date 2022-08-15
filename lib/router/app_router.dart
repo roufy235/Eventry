@@ -1,3 +1,4 @@
+import 'package:eventry/resource/hive_repository.dart';
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/screens/home/home_screen.dart';
@@ -6,11 +7,9 @@ import 'package:eventry/screens/login/login_screen.dart';
 import 'package:eventry/screens/onboard/onboarding_screen.dart';
 import 'package:eventry/screens/register/account_created_screen.dart';
 import 'package:eventry/screens/register/registration_screen.dart';
-import 'package:eventry/utils/myFunctions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class AppRouter {
   GoRouter get router => _goRouter;
@@ -96,8 +95,7 @@ class AppRouter {
           }
 
           if (isGoingOnboardingLocation) {
-            Box box = Hive.box(boxName);
-            int? value = box.get(boxIsOnboardingViewed);
+            int? value = HiveRepository().getOnboardingViewedStatus;
             if (value != null && value == 1) {
               return loginLocation;
             }

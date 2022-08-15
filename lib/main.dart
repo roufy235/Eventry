@@ -1,9 +1,10 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:eventry/firebase_options.dart';
+import 'package:eventry/models/hive/user_data_hive.dart';
+import 'package:eventry/resource/hive_repository.dart';
 import 'package:eventry/router/app_router.dart';
 import 'package:eventry/utils/colors.dart';
 import 'package:eventry/utils/dimens.dart';
-import 'package:eventry/utils/myFunctions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +16,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
+  Hive.registerAdapter(UserDataHiveAdapter());
   await Hive.openBox(boxName);
   runApp(ProviderScope(child: MyApp()));
 }
