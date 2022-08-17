@@ -55,6 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
+    String appLogoString = Theme.of(context).brightness == Brightness.light ? 'assets/images/apple.png' : 'assets/images/apple_white.png';
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -253,7 +254,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset('assets/images/apple.png',
+                        Image.asset(appLogoString,
                           width: 22.w,
                           height: 22.w,
                         ),
