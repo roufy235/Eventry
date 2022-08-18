@@ -1,4 +1,3 @@
-import 'package:eventry/models/firebase/user_model.dart';
 import 'package:eventry/resource/auth_methods.dart';
 import 'package:eventry/resource/hive_repository.dart';
 import 'package:eventry/router/app_screens.dart';
