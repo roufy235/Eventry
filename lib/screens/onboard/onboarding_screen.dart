@@ -60,11 +60,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 _pageIndex = index;
                 if (index == (_models.length - 1)) {
                   _next = getStartedTxt;
-
+                } else {
+                  _next = 'Next';
                 }
               });
             },
-            physics: const NeverScrollableScrollPhysics(),
+            //physics: const NeverScrollableScrollPhysics(),
             controller: _controller,
             itemCount: _models.length,
             itemBuilder: (BuildContext context, int index) {
@@ -76,10 +77,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       bottomNavigationBar: Container(
         color: getBgColor(context),
         padding: EdgeInsets.symmetric(
-          horizontal: 10.w,
-          vertical: 8.h
+          horizontal: size10.w,
+          vertical: size8.h
         ),
-        height: 125.h,
+        height: size125.h,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -94,16 +95,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 }),
               ],
             ),
-            SizedBox(height: 5.h),
+            SizedBox(height: size5.h),
             SizedBox(
-              height: defaultBtnHeight.h,
+              height: size38.h,
               width: double.infinity,
               child: TextButton(
                   onPressed: () {},
                   child: const Text('Skip')
               ),
             ),
-            SizedBox(height: 5.h),
+            SizedBox(height: size5.h),
             BtnElevated(
                 child: Text(_next),
                 onPressed: () {
@@ -118,7 +119,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   }
                 }
             ),
-            SizedBox(height: 15.h),
+            SizedBox(height: size15.h),
           ],
         ),
       ),

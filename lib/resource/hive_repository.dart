@@ -3,7 +3,7 @@ import 'package:eventry/models/hive/user_data_hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 // Hive constants
-const String boxName = 'eventryBox';
+const String boxName = 'eventryBoxV1';
 
 class HiveRepository {
   final Box _box = Hive.box(boxName);

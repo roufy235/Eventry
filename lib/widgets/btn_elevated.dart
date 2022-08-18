@@ -11,7 +11,7 @@ class BtnElevated extends StatelessWidget {
   const BtnElevated({
     Key? key,
     required this.child,
-    this.btnHeight = defaultBtnHeight,
+    this.btnHeight = size38,
     this.btnWidth = double.infinity,
     this.isLoading = false,
     required this.onPressed

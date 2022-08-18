@@ -9,7 +9,7 @@ class BtnOutlined extends StatelessWidget {
   const BtnOutlined({
     Key? key,
     required this.child,
-    this.btnHeight = defaultBtnHeight,
+    this.btnHeight = size38,
     this.btnWidth = double.infinity,
     required this.onPressed
   }) : super(key: key);
