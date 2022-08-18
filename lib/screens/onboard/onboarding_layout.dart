@@ -1,5 +1,5 @@
 import 'package:eventry/models/onboarding_model.dart';
-import 'package:eventry/utils/my_functions.dart';
+import 'package:eventry/config/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

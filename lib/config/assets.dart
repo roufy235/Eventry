@@ -1,6 +1,6 @@
 
-String logo = 'assets/images/logo_dark.svg';
-String apple = 'assets/images/apple_white.png';
-String appleDark = 'assets/images/apple.png';
-String facebook = 'assets/images/facebook.png';
-String google = 'assets/images/google.png';
+String appLogo = 'assets/images/logo_dark.svg';
+String appleIconLight = 'assets/images/apple_white.png';
+String appleIconDark = 'assets/images/apple.png';
+String facebookIcon = 'assets/images/facebook.png';
+String googleIcon = 'assets/images/google.png';

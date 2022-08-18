@@ -1,8 +1,10 @@
+import 'package:eventry/config/config.dart';
 import 'package:eventry/resource/auth_methods.dart';
-import 'package:eventry/router/app_screens.dart';
-import 'package:eventry/router/app_screens_ext.dart';
-import 'package:eventry/utils/my_functions.dart';
+import 'package:eventry/router/router.dart';
+import 'package:eventry/utils/utils.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
+import 'package:eventry/widgets/continue_with_widget.dart';
+import 'package:eventry/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,10 +41,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     String phone = _phoneController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
-    if (validateString(context, 'name is required', name)) {
-      if (validateString(context, 'phone is required', phone)) {
-        if (validateString(context, 'email is required', email)) {
-          if (validateString(context, 'password is required', password)) {
+    if (context.validateString(nameErr, name)) {
+      if (context.validateString(phoneErr, phone)) {
+        if (context.validateString(emailErr, email)) {
+          if (context.validateString(passwordErr, password)) {
             ref.read(_isLoadingProvider.notifier).state = 1;
             String response = await AuthMethods().createAccount(
                 phone: phone,
@@ -53,7 +55,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             if (response != 'success') {
               ref.read(_isLoadingProvider.notifier).state = 0;
               if (!mounted) return;
-              customSnackBar(context, response);
+              context.customSnackBar(response);
             }
           }
         }
@@ -64,28 +66,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
-    String appLogoString = Theme.of(context).brightness == Brightness.light ? 'assets/images/apple.png' : 'assets/images/apple_white.png';
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: 30.w
+                horizontal: size30.w
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30.h),
+                SizedBox(height: size30.h),
                 Center(
-                  child: SvgPicture.asset('assets/images/logo_dark.svg',
+                  child: SvgPicture.asset(appLogo,
                     fit: BoxFit.cover,
-                    width: 50.w,
-                    height: 50.w,
+                    width: size50.w,
+                    height: size50.w,
                   ),
                 ),
-                SizedBox(height: 30.h),
+                SizedBox(height: size30.h),
                 Center(
-                  child: Text('Sign Up for Free',
+                  child: Text(signUpText,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline6!.copyWith(
                         fontWeight: FontWeight.bold,
@@ -93,183 +94,57 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 25.h),
-                TextField(
-                  controller: _nameController,
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter your name',
-                    //errorText: errorTextPassword,
-                    //border: const OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.person),
-                  ),
+                SizedBox(height: size25.h),
+                AppTextField(
+                    controller: _nameController,
+                    labelText: nameText,
+                    keyboardType: TextInputType.text,
+                    icon: Icons.person
                 ),
-                SizedBox(height: 25.h),
-                TextField(
-                  controller: _phoneController,
-                  keyboardType: TextInputType.phone,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter your phone',
-                    //errorText: errorTextPassword,
-                    //border: const OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.phone),
-                  ),
+                SizedBox(height: size25.h),
+                AppTextField(
+                    controller: _phoneController,
+                    labelText: phoneText,
+                    keyboardType: TextInputType.phone,
+                    icon: Icons.phone
                 ),
-                SizedBox(height: 25.h),
-                TextField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter your email address',
-                    //errorText: errorTextPassword,
-                    //border: const OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.email),
-                  ),
+                SizedBox(height: size25.h),
+                AppTextField(
+                    controller: _emailController,
+                    labelText: emailText,
+                    keyboardType: TextInputType.emailAddress,
+                    icon: Icons.email
                 ),
-                SizedBox(height: 25.h),
-                TextField(
-                  controller: _passwordController,
-                  keyboardType: TextInputType.text,
+                SizedBox(height: size25.h),
+                AppTextField(
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Enter your password',
-                    //errorText: errorTextPassword,
-                    //border: const OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.lock),
-                  ),
+                    controller: _passwordController,
+                    labelText: passwordText,
+                    keyboardType: TextInputType.text,
+                    icon: Icons.lock
                 ),
-                SizedBox(height: 25.h),
+                SizedBox(height: size25.h),
                 Consumer(
                   builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
                     int value = ref.watch(_isLoadingProvider.state).state;
                     return BtnElevated(
                       onPressed: () => createAccountFunc(ref),
                       isLoading: value == 1,
-                      child: const Text('Sign Up'),
+                      child: const Text(signUpTxt),
 
                     );
                   }
                 ),
-                SizedBox(height: 20.h),
-                const Text("Already a member?"),
+                SizedBox(height: size20.h),
+                const Text(alreadyAMemberText),
                 TextButton(
                     onPressed: () {
                       context.go('/${AppScreens.login.toPath}');
                     },
-                    child: const Text('Login')
+                    child: const Text(signInTxt)
                 ),
-                SizedBox(height: 10.h),
-                Center(
-                  child: Text('or continue with',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ),
-                SizedBox(height: 25.h),
-                Row(
-                  children: [
-                    Expanded(
-                      child:  InkWell(
-                        onTap: () {},
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: getFadedBgColor(context),
-                              borderRadius: BorderRadius.circular(10.r)
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 12.h,
-                              horizontal: 20.w
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/facebook.png',
-                                width: 22.w,
-                                height: 22.w,
-                              ),
-                              SizedBox(width: 8.h),
-                              Text('Facebook',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontWeight: FontWeight.bold
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 10.w),
-                    Expanded(
-                      child:  InkWell(
-                        onTap: () {},
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: getFadedBgColor(context),
-                              borderRadius: BorderRadius.circular(10.r)
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 12.h,
-                              horizontal: 20.w
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/google.png',
-                                width: 22.w,
-                                height: 22.w,
-                              ),
-                              SizedBox(width: 8.h),
-                              Text('Google',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontWeight: FontWeight.bold
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.h),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: getFadedBgColor(context),
-                        borderRadius: BorderRadius.circular(10.r)
-                    ),
-                    padding: EdgeInsets.symmetric(
-                        vertical: 12.h,
-                        horizontal: 20.w
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          appLogoString,
-                          width: 22.w,
-                          height: 22.w,
-                        ),
-                        SizedBox(width: 8.h),
-                        Text('Apple',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontWeight: FontWeight.bold
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                SizedBox(height: size10.h),
+                const ContinueWithWidget(),
                 SizedBox(height: 30.h),
               ],
             ),

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventry/models/firebase/user_model.dart';
 import 'package:eventry/resource/hive_repository.dart';
-import 'package:eventry/utils/my_firebase_firestore_constants.dart';
+import 'package:eventry/config/config.dart';
 
 class FirestoreMethods {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;

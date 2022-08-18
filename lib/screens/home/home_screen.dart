@@ -1,5 +1,5 @@
 import 'package:eventry/resource/auth_methods.dart';
-import 'package:eventry/states/state.dart';
+import 'package:eventry/providers/state.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

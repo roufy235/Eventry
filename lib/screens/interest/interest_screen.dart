@@ -1,11 +1,9 @@
 import 'package:eventry/models/interest_model.dart';
-import 'package:eventry/router/app_screens.dart';
-import 'package:eventry/router/app_screens_ext.dart';
-import 'package:eventry/states/state.dart';
-import 'package:eventry/utils/colors.dart';
-import 'package:eventry/utils/my_functions.dart';
+import 'package:eventry/providers/state.dart';
+import 'package:eventry/config/config.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
+import 'package:eventry/router/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -30,7 +28,7 @@ class InterestScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         leading: null,
-        title: const Text('Select your Interest'),
+        title: const Text(selectYourInterest),
       ),
       body: Padding(
         padding: EdgeInsets.only(

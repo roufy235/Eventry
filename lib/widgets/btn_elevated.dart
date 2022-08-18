@@ -1,4 +1,4 @@
-import 'package:eventry/utils/dimens.dart';
+import 'package:eventry/config/dimens.dart';
 import 'package:eventry/widgets/loading_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
