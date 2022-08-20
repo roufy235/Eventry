@@ -9,8 +9,7 @@ import 'package:eventry/config/config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../../providers/providers.dart';
+import 'package:eventry/providers/providers.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -179,7 +178,9 @@ class HomeTab extends StatelessWidget {
             SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                     (BuildContext ctx, int index) {
-                      return const EventListBoxWidget();
+                      return EventListBoxWidget(
+                        imageLink: 'https://picsum.photos/seed/${index + 20}/400/200',
+                      );
                     },
                   childCount: 10,
                 ),
@@ -187,7 +188,7 @@ class HomeTab extends StatelessWidget {
                     maxCrossAxisExtent: 370,
                     childAspectRatio: 3/4,
                     crossAxisSpacing: 13,
-                    mainAxisSpacing: 13
+                    mainAxisSpacing: 23
                 )
             ),
             SliverPadding(

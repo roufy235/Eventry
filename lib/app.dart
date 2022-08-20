@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
             title: appName,
             theme: ThemeData(
               scaffoldBackgroundColor: colorWhite,
+              dialogBackgroundColor: colorWhite,
               useMaterial3: true,
               colorScheme: lightColorScheme,
               floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
             ),
             darkTheme: ThemeData(
               scaffoldBackgroundColor: brandColorDark,
+              dialogBackgroundColor: brandColorDarkFaded,
               floatingActionButtonTheme: const FloatingActionButtonThemeData(
                   backgroundColor: brandColorDarkFaded,
                   foregroundColor: brandColorD

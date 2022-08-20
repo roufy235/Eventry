@@ -5,7 +5,8 @@ import 'package:eventry/config/config.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class EventListBoxWidget extends StatelessWidget {
-  const EventListBoxWidget({Key? key}) : super(key: key);
+  final String imageLink;
+  const EventListBoxWidget({Key? key, required this.imageLink}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +22,16 @@ class EventListBoxWidget extends StatelessWidget {
           Stack(
             children: [
               Positioned(
-                child: Container(
+                child: SizedBox(
                   height: 100.h,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(size12.r),
-                        topRight: Radius.circular(size12.r),
-                      ),
-                      image: const DecorationImage(
-                          image: AssetImage(localConcert),
-                          fit: BoxFit.cover
-                      )
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(size12.r),
+                      topRight: Radius.circular(size12.r),
+                    ),
+                    child: Image.network(imageLink,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
