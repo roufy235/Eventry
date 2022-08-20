@@ -1,68 +1,46 @@
 import 'package:eventry/config/config.dart';
-import 'package:eventry/resource/auth_methods.dart';
-import 'package:eventry/widgets/click_icon.dart';
+import 'package:eventry/screens/home/tabs/home_tab.dart';
+import 'package:eventry/screens/home/tabs/trending_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:eventry/providers/providers.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+
+  final PageController _pageController = PageController(initialPage: 0);
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
+    ref.listen<dynamic>(bottomNavigationCurrentIndexProvider, (previous, next) {
+      _pageController.jumpToPage(next);
+    });
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(appName,
-              style: Theme.of(context).textTheme.headline6!.copyWith(
-                fontWeight: FontWeight.bold
-              ),
-            ),
-            Row(
-              children: [
-                ClickIcon(
-                    iconColor: getTextColor(context),
-                    icon: Icons.notifications,
-                    onPressed: null,
-                  boxColor: getFadedBgColor(context),
-                ),
-                SizedBox(width: size8.w),
-                ClickIcon(
-                    iconColor: getTextColor(context),
-                    icon: Icons.logout_sharp,
-                    boxColor: getFadedBgColor(context),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Logout'),
-                              content: const Text('are you sure?'),
-                              actions: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text('cancel')
-                                ),
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      AuthMethods().logout();
-                                    },
-                                    child: const Text('logout')
-                                )
-                              ],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ],
-            )
+      body: SizedBox.expand(
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (int index) {
+            ref.read(bottomNavigationCurrentIndexProvider.state).state = index;
+          },
+          children: const [
+            HomeTab(),
+            TrendingTab(),
           ],
         ),
       ),
@@ -79,8 +57,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         child: NavigationBar(
+          selectedIndex: ref.watch(bottomNavigationCurrentIndexProvider.state).state,
           height: 70,
           elevation: 10.0,
+          onDestinationSelected: (int index) {
+            ref.read(bottomNavigationCurrentIndexProvider.notifier).state = index;
+          },
           destinations: [
             NavigationDestination(
               label: 'Home',

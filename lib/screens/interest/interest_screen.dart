@@ -1,8 +1,8 @@
 import 'package:eventry/models/interest_model.dart';
-import 'package:eventry/providers/state.dart';
 import 'package:eventry/config/config.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
+import 'package:eventry/providers/providers.dart';
 import 'package:eventry/router/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

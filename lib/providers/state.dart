@@ -10,3 +10,4 @@ final userDataProvider = StateProvider<UserDataHive>((ref) {
   return HiveRepository().getUserData;
 });
 
+final StateProvider bottomNavigationCurrentIndexProvider = StateProvider<int>((ref) => 0);
