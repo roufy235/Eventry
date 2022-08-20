@@ -1,5 +1,6 @@
 import 'package:eventry/models/interest_model.dart';
 import 'package:eventry/resource/auth_methods.dart';
+import 'package:eventry/router/router.dart';
 import 'package:eventry/widgets/btn_outlined.dart';
 import 'package:eventry/widgets/click_icon.dart';
 import 'package:eventry/widgets/event_list_box.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:eventry/providers/providers.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -32,7 +34,9 @@ class HomeTab extends StatelessWidget {
                 ClickIcon(
                   iconColor: getTextColor(context),
                   icon: FontAwesomeIcons.solidBell,
-                  onPressed: null,
+                  onPressed: () {
+                    context.go('/${AppScreens.home.toPath}/${AppScreens.notification.toPath}');
+                  },
                   boxColor: getFadedBgColor(context),
                 ),
                 SizedBox(width: size8.w),

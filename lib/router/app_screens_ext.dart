@@ -9,6 +9,7 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.register: return 'register';
       case AppScreens.interest: return 'interest';
       case AppScreens.registerDone: return 'registerDone';
+      case AppScreens.notification: return 'notification';
     }
   }
 
@@ -20,6 +21,7 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.register: return 'register';
       case AppScreens.interest: return 'interest';
       case AppScreens.registerDone: return 'registerDone';
+      case AppScreens.notification: return 'notification';
     }
   }
 }

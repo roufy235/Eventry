@@ -4,6 +4,7 @@ import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/screens/home/home_screen.dart';
 import 'package:eventry/screens/interest/interest_screen.dart';
 import 'package:eventry/screens/login/login_screen.dart';
+import 'package:eventry/screens/notification/notification_screen.dart';
 import 'package:eventry/screens/onboard/onboarding_screen.dart';
 import 'package:eventry/screens/register/account_created_screen.dart';
 import 'package:eventry/screens/register/registration_screen.dart';
@@ -43,7 +44,14 @@ class AppRouter {
         GoRoute(
             path: '/${AppScreens.home.toPath}',
             name: AppScreens.home.toName,
-            builder: (BuildContext context, GoRouterState state) => const HomeScreen()
+            builder: (BuildContext context, GoRouterState state) => const HomeScreen(),
+          routes: [
+            GoRoute(
+                path: AppScreens.notification.toPath,
+                name: AppScreens.notification.toName,
+                builder: (BuildContext context, GoRouterState state) => const NotificationScreen()
+            )
+          ]
         ),
         GoRoute(
             path: '/${AppScreens.interest.toPath}',

@@ -5,4 +5,5 @@ enum AppScreens {
   login,
   register,
   registerDone,
+  notification,
 }
