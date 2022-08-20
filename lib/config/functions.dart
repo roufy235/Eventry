@@ -15,6 +15,13 @@ Color getFadedBgColor(BuildContext context) {
   return brandColorDarkFaded;
 }
 
+Color getScaffoldColor(BuildContext context) {
+  if (Theme.of(context).brightness == Brightness.light) {
+    return colorWhiteV2;
+  }
+  return brandColorDarkFaded;
+}
+
 Color getTextColor(BuildContext context) {
   if (Theme.of(context).brightness == Brightness.light) {
     return brandColor;

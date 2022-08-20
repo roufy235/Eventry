@@ -36,6 +36,10 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: colorWhite,
               useMaterial3: true,
               colorScheme: lightColorScheme,
+              floatingActionButtonTheme: const FloatingActionButtonThemeData(
+                backgroundColor: brandColorFaded,
+                foregroundColor: brandColor
+              ),
               elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -71,6 +75,10 @@ class MyApp extends StatelessWidget {
             ),
             darkTheme: ThemeData(
               scaffoldBackgroundColor: brandColorDark,
+              floatingActionButtonTheme: const FloatingActionButtonThemeData(
+                  backgroundColor: brandColorDarkFaded,
+                  foregroundColor: brandColorD
+              ),
               elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(

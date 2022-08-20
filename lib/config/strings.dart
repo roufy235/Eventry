@@ -1,4 +1,4 @@
-const String appName = 'Eventry App';
+const String appName = 'Eventry';
 const String signInText = 'Sign In to your Account';
 const String signUpText = 'Sign Up for Free';
 const String nameText = 'Enter your name';
