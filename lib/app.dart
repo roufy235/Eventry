@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
               elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(defaultBtnRadius),
                     ),
                     primary: lightColorScheme.primary,
                     onPrimary: lightColorScheme.onPrimary,
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
               textButtonTheme: TextButtonThemeData(
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(defaultBtnRadius),
                     ),
                     primary: lightColorScheme.primary,
                   )
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
               outlinedButtonTheme: OutlinedButtonThemeData(
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(defaultBtnRadius),
                     ),
                     primary: lightColorScheme.primary,
                     side: BorderSide(width: 1.0, color: lightColorScheme.primary, style: BorderStyle.solid,),
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
               elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(defaultBtnRadius),
                     ),
                     primary: brandColorD,
                     onPrimary: colorWhite,
@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
               textButtonTheme: TextButtonThemeData(
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(defaultBtnRadius),
                     ),
                     primary: brandColorD,
                   )
@@ -99,7 +99,7 @@ class MyApp extends StatelessWidget {
               outlinedButtonTheme: OutlinedButtonThemeData(
                   style: OutlinedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(defaultBtnRadius),
                     ),
                     primary: brandColorD,
                     side: BorderSide(width: 1.0, color: lightColorScheme.primary, style: BorderStyle.solid,),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:eventry/config/config.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ClickIcon extends StatelessWidget {
   final Color boxColor, iconColor;
@@ -28,7 +29,7 @@ class ClickIcon extends StatelessWidget {
             color: boxColor,
             borderRadius: BorderRadius.circular(boxRadius.r)
         ),
-        child: Icon(icon, color: iconColor),
+        child: FaIcon(icon, color: iconColor),
       ),
     );
   }

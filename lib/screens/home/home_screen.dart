@@ -50,7 +50,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
-          //indicatorColor: Colors.blue.shade200,
+          //indicatorColor: getBgColor(context),
           backgroundColor: getScaffoldColor(context),
           labelTextStyle: MaterialStateProperty.all(
             const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
@@ -67,22 +67,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             NavigationDestination(
               label: 'Home',
               icon: FaIcon(FontAwesomeIcons.house, size: 15.h),
-              selectedIcon: FaIcon(FontAwesomeIcons.house, size: 15.h),
+              selectedIcon: FaIcon(FontAwesomeIcons.house, size: 15.h, color: getTextColor(context)),
             ),
             NavigationDestination(
               label: 'Trending',
               icon: FaIcon(FontAwesomeIcons.solidCalendarCheck, size: 15.h),
-              selectedIcon: FaIcon(FontAwesomeIcons.solidCalendarCheck, size: 15.h),
+              selectedIcon: FaIcon(FontAwesomeIcons.solidCalendarCheck, size: 15.h, color: getTextColor(context)),
             ),
             NavigationDestination(
               label: 'Calendar',
               icon: FaIcon(FontAwesomeIcons.solidCalendar, size: 15.h),
-              selectedIcon: FaIcon(FontAwesomeIcons.solidCalendar, size: 15.h),
+              selectedIcon: FaIcon(FontAwesomeIcons.solidCalendar, size: 15.h, color: getTextColor(context)),
             ),
             NavigationDestination(
               label: 'Map',
               icon: FaIcon(FontAwesomeIcons.solidMap, size: 15.h),
-              selectedIcon: FaIcon(FontAwesomeIcons.solidMap, size: 15.h),
+              selectedIcon: FaIcon(FontAwesomeIcons.solidMap, size: 15.h, color: getTextColor(context)),
             )
           ],
         ),
