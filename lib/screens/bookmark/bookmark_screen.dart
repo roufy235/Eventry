@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({Key? key}) : super(key: key);
+class BookmarkScreen extends StatelessWidget {
+  const BookmarkScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +15,11 @@ class NotificationScreen extends StatelessWidget {
             backPressed: () {
               context.pop();
             },
-            title: 'Notifications',
+            title: 'Bookmark',
             actionIcons: const [FontAwesomeIcons.ellipsisVertical],
             actionOnePressed: () {  },
           ),
-        )
+        ),
     );
   }
 }

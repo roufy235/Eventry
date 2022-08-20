@@ -6,3 +6,6 @@ const String facebookIcon = 'assets/images/facebook.png';
 const String googleIcon = 'assets/images/google.png';
 const String internationalConcert = 'assets/images/int_concert.jpeg';
 const String localConcert = 'assets/images/local_concert.jpeg';
+const String galaConcert = 'assets/images/Gala.jpeg';
+const String artTrainingConcert = 'assets/images/art_training.jpeg';
+const String sportTrainingConcert = 'assets/images/sport_training.jpeg';

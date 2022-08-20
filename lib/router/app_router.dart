@@ -1,6 +1,8 @@
 import 'package:eventry/resource/hive_repository.dart';
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
+import 'package:eventry/screens/bookmark/bookmark_screen.dart';
+import 'package:eventry/screens/featured/featured_screen.dart';
 import 'package:eventry/screens/home/home_screen.dart';
 import 'package:eventry/screens/interest/interest_screen.dart';
 import 'package:eventry/screens/login/login_screen.dart';
@@ -50,6 +52,16 @@ class AppRouter {
                 path: AppScreens.notification.toPath,
                 name: AppScreens.notification.toName,
                 builder: (BuildContext context, GoRouterState state) => const NotificationScreen()
+            ),
+            GoRoute(
+                path: AppScreens.bookmark.toPath,
+                name: AppScreens.bookmark.toName,
+                builder: (BuildContext context, GoRouterState state) => const BookmarkScreen()
+            ),
+            GoRoute(
+                path: AppScreens.featured.toPath,
+                name: AppScreens.featured.toName,
+                builder: (BuildContext context, GoRouterState state) => const FeaturedScreen()
             )
           ]
         ),

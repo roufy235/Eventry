@@ -6,4 +6,6 @@ enum AppScreens {
   register,
   registerDone,
   notification,
+  bookmark,
+  featured,
 }

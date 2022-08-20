@@ -4,11 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:eventry/config/config.dart';
 
 class FeaturedBannerWidget extends StatelessWidget {
-  final String imagePath, bannerName;
+  final String imagePath, bannerName, btnText;
   final VoidCallback? onPressed;
   const FeaturedBannerWidget({
     Key? key,
     required this.imagePath,
+    required this.btnText,
     required this.bannerName,
     required this.onPressed,
   }) : super(key: key);
@@ -63,7 +64,7 @@ class FeaturedBannerWidget extends StatelessWidget {
                       btnHeight: size30,
                       btnRadius: size30,
                       onPressed: onPressed,
-                      child: const Text('Book Now')
+                      child: Text(btnText)
                   ),
                 )
               ],

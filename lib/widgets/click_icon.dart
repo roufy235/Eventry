@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ClickIcon extends StatelessWidget {
   final Color boxColor, iconColor;
-  final double boxPadding, boxRadius;
+  final double boxRadius;
   final IconData icon;
   final VoidCallback? onPressed;
   const ClickIcon({
@@ -14,7 +14,6 @@ class ClickIcon extends StatelessWidget {
     required this.iconColor,
     required this.onPressed,
     required this.boxColor,
-    this.boxPadding = size8,
     this.boxRadius = size10,
   }) : super(key: key);
 
@@ -24,12 +23,15 @@ class ClickIcon extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        padding: EdgeInsets.all(boxPadding.w),
+        width: size38.w,
+        height: size38.w,
         decoration: BoxDecoration(
             color: boxColor,
             borderRadius: BorderRadius.circular(boxRadius.r)
         ),
-        child: FaIcon(icon, color: iconColor),
+        child: Center(
+          child: FaIcon(icon, color: iconColor, size: 20.sp,),
+        ),
       ),
     );
   }

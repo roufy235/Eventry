@@ -1,3 +1,4 @@
+import 'package:eventry/models/featured_model.dart';
 import 'package:eventry/models/interest_model.dart';
 import 'package:eventry/resource/auth_methods.dart';
 import 'package:eventry/router/router.dart';
@@ -36,6 +37,15 @@ class HomeTab extends StatelessWidget {
                   icon: FontAwesomeIcons.solidBell,
                   onPressed: () {
                     context.go('/${AppScreens.home.toPath}/${AppScreens.notification.toPath}');
+                  },
+                  boxColor: getFadedBgColor(context),
+                ),
+                SizedBox(width: size8.w),
+                ClickIcon(
+                  iconColor: getTextColor(context),
+                  icon: FontAwesomeIcons.solidBookmark,
+                  onPressed: () {
+                    context.go('/${AppScreens.home.toPath}/${AppScreens.bookmark.toPath}');
                   },
                   boxColor: getFadedBgColor(context),
                 ),
@@ -121,28 +131,32 @@ class HomeTab extends StatelessWidget {
                   headingRow(
                       ctx: context,
                       title:'Featured',
-                      onPressed: () { },
+                      onPressed: () { context.go('/${AppScreens.home.toPath}/${AppScreens.featured.toPath}');},
                       clickText:'See all'
                   ),
                   SizedBox(height: size10.h),
-                  SizedBox(
-                    height: size125.h,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        FeaturedBannerWidget(
-                          imagePath: internationalConcert,
-                          bannerName: 'International Concert',
-                          onPressed: () {},
+                  Consumer(
+                    builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
+                      final List<FeaturedModel> featured = ref.read(featuredProvider.state).state;
+                      return SizedBox(
+                        height: size125.h,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: featured.length > 3 ? 3 : featured.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return FeaturedBannerWidget(
+                              btnText: featured[index].btnText,
+                              imagePath: featured[index].imagePath,
+                              bannerName: featured[index].text,
+                              onPressed: () {},
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(width: size15.w);
+                          },
                         ),
-                        SizedBox(width: size12.w),
-                        FeaturedBannerWidget(
-                          imagePath: localConcert,
-                          bannerName: 'Local Concert',
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+                      );
+                    }
                   ),
                   SizedBox(height: size15.h),
                   headingRow(
