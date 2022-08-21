@@ -58,12 +58,13 @@ class EventListBoxWidget extends StatelessWidget {
           ),
           SizedBox(height: size8.h),
           Text('Tech Conference',
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.bodyLarge,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: size5.h),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BtnOutlined(
                   btnHeight: size15.h,
@@ -78,7 +79,7 @@ class EventListBoxWidget extends StatelessWidget {
               ),
               SizedBox(width: size5.w),
               Text('20k+ Going',
-                style: TextStyle(fontSize: 10.sp),
+                style: Theme.of(context).textTheme.bodySmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               )
@@ -98,7 +99,9 @@ class EventListBoxWidget extends StatelessWidget {
                         size: 12.sp,
                       ),
                       SizedBox(width: size5.w),
-                      const Text('Eko Hotel')
+                      Text('Eko Hotel',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      )
                     ],
                   ),
                 ),

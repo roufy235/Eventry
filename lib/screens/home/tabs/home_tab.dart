@@ -87,9 +87,7 @@ class HomeTab extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: size12.w
-        ),
+        padding: EdgeInsets.symmetric(horizontal: size12.w),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -121,7 +119,7 @@ class HomeTab extends StatelessWidget {
                       SizedBox(width: size8.w),
                       ClickIcon(
                         iconColor: getTextColor(context),
-                        icon: FontAwesomeIcons.barsStaggered,
+                        icon: FontAwesomeIcons.magnifyingGlass,
                         onPressed: null,
                         boxColor: getFadedBgColor(context),
                       )
@@ -159,11 +157,17 @@ class HomeTab extends StatelessWidget {
                     }
                   ),
                   SizedBox(height: size15.h),
-                  headingRow(
-                      ctx: context,
-                      title:'Trending',
-                      onPressed: () { },
-                      clickText:'See all'
+                  Consumer(
+                    builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
+                      return headingRow(
+                          ctx: context,
+                          title:'Trending',
+                          onPressed: () {
+                            ref.read(bottomNavigationCurrentIndexProvider.notifier).state = 1;
+                          },
+                          clickText:'See all'
+                      );
+                    }
                   ),
                   SizedBox(height: size10.h),
                   SizedBox(
@@ -214,7 +218,7 @@ class HomeTab extends StatelessWidget {
             )
           ],
         ),
-      ),
+      )
     );
   }
 
@@ -226,8 +230,16 @@ class HomeTab extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title,
-          style: Theme.of(ctx).textTheme.headline6,
+        Row(
+          children: [
+            Text(title,
+              style: Theme.of(ctx).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            SizedBox(width: size10.w),
+            const FaIcon(FontAwesomeIcons.caretDown)
+          ],
         ),
         TextButton(
             onPressed: onPressed,

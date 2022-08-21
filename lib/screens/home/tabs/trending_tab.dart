@@ -18,7 +18,7 @@ class TrendingTab extends ConsumerWidget {
           backPressed: () {
             ref.read(bottomNavigationCurrentIndexProvider.state).state = 0;
           },
-          title: 'Featured',
+          title: 'Trending',
           actionIcons: const [FontAwesomeIcons.magnifyingGlass],
           actionOnePressed: () {  },
         ),
