@@ -182,7 +182,11 @@ class HomeTab extends StatelessWidget {
                               return BtnOutlined(
                                   btnRadius: size38,
                                   btnWidth: size60.w,
-                                  child: Text(cates[index].text),
+                                  child: Text(
+                                      cates[index].text,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                   onPressed: () {}
                               );
                             },

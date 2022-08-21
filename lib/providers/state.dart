@@ -18,10 +18,10 @@ final StateProvider bottomNavigationCurrentIndexProvider = StateProvider<int>((r
 final StateProvider interestProvider = StateProvider<List<InterestModel>>((ref) {
   return [
     InterestModel(id: 1, text: 'Art', icon: FontAwesomeIcons.clipboard),
-    InterestModel(id: 2, text: 'Music', icon: FontAwesomeIcons.music),
-    InterestModel(id: 3, text: 'Sport', icon: FontAwesomeIcons.football),
     InterestModel(id: 4, text: 'Food', icon: FontAwesomeIcons.burger),
+    InterestModel(id: 2, text: 'Music', icon: FontAwesomeIcons.music),
     InterestModel(id: 5, text: 'Party', icon: FontAwesomeIcons.champagneGlasses),
+    InterestModel(id: 3, text: 'Sport', icon: FontAwesomeIcons.football),
     InterestModel(id: 6, text: 'Technology', icon: FontAwesomeIcons.microchip),
   ];
 });

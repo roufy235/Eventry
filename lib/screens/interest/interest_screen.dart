@@ -9,21 +9,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-final List<InterestModel> interest = <InterestModel>[
-  InterestModel(id: 1, text: 'Art', icon: FontAwesomeIcons.clipboard),
-  InterestModel(id: 2, text: 'Music', icon: FontAwesomeIcons.music),
-  InterestModel(id: 3, text: 'Sport', icon: FontAwesomeIcons.football),
-  InterestModel(id: 4, text: 'Food', icon: FontAwesomeIcons.burger),
-  InterestModel(id: 5, text: 'Party', icon: FontAwesomeIcons.champagneGlasses),
-  InterestModel(id: 6, text: 'Technology', icon: FontAwesomeIcons.microchip),
-];
-
 class InterestScreen extends ConsumerWidget {
   const InterestScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final interestIds = ref.watch(interestIdsStateNotifierProvider);
+    final List<InterestModel> interests = ref.read(interestProvider.state).state;
     ScreenUtil.init(context);
     return Scaffold(
       appBar: AppBar(
@@ -43,32 +35,32 @@ class InterestScreen extends ConsumerWidget {
                 crossAxisSpacing: 13,
                 mainAxisSpacing: 13
             ),
-            itemCount: interest.length,
+            itemCount: interests.length,
             itemBuilder: (BuildContext ctx, int index) {
               return InkWell(
                 onTap: () {
-                  int selectedId = interest[index].id;
+                  int selectedId = interests[index].id;
                   ref.read(interestIdsStateNotifierProvider.notifier).updateData = selectedId;
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                      color: interestIds.contains(interest[index].id) ? brandColor : getFadedBgColor(context),
+                      color: interestIds.contains(interests[index].id) ? brandColor : getFadedBgColor(context),
                       borderRadius: BorderRadius.circular(20.r)
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FaIcon(interest[index].icon,
-                        color: interestIds.contains(interest[index].id) ? colorWhite : getTextColor(context),
+                      FaIcon(interests[index].icon,
+                        color: interestIds.contains(interests[index].id) ? colorWhite : getTextColor(context),
                         size: 40.sp,
                       ),
                       SizedBox(height: 8.h),
-                      Text(interest[index].text,
+                      Text(interests[index].text,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: interestIds.contains(interest[index].id) ? colorWhite : getTextColor(context),
+                          color: interestIds.contains(interests[index].id) ? colorWhite : getTextColor(context),
                         ),
                       )
                     ],
