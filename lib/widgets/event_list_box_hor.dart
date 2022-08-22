@@ -62,7 +62,7 @@ class EventListHorBoxWidget extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(
                       width: 2.0,
-                      color: brandColorFaded
+                      color: getScaffoldColor(context)
                   ),
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(size12.r),
