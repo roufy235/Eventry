@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BtnElevated extends StatelessWidget {
   final Widget child;
+  final bool useFlexibleWith;
   final VoidCallback? onPressed;
   final double btnHeight, btnWidth, btnRadius;
   final bool isLoading;
@@ -12,6 +13,7 @@ class BtnElevated extends StatelessWidget {
     Key? key,
     required this.child,
     this.btnHeight = size38,
+    this.useFlexibleWith = false,
     this.btnRadius = defaultBtnRadius,
     this.btnWidth = double.infinity,
     this.isLoading = false,
@@ -23,7 +25,7 @@ class BtnElevated extends StatelessWidget {
     Color primaryColor = Theme.of(context).colorScheme.primary;
     return SizedBox(
       height: btnHeight.h,
-      width: btnWidth.w,
+      width: useFlexibleWith == true ? null : btnWidth.w,
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(

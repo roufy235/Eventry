@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:eventry/widgets/btn_outlined.dart';
 import 'package:eventry/widgets/click_icon.dart';
+import 'package:eventry/widgets/profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,27 +42,23 @@ class EventDetailsScreen extends ConsumerWidget {
                   fontWeight: FontWeight.bold
                 ),
               ),
-              background: Stack(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: double.maxFinite,
-                    child: CachedNetworkImage(
-                      imageUrl: eventImageName ?? 'https://picsum.photos/seed/21/500/400',
-                      fit: BoxFit.cover,
-                      progressIndicatorBuilder: (context, url, downloadProgress) {
-                        return Center(
-                          child: SizedBox(
-                            height: size20.w,
-                            width: size20.w,
-                            child: CircularProgressIndicator(value: downloadProgress.progress),
-                          ),
-                        );
-                      },
-                      errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
-                    ),
-                  )
-                ],
+              background: SizedBox(
+                width: double.infinity,
+                height: double.maxFinite,
+                child: CachedNetworkImage(
+                  imageUrl: eventImageName ?? 'https://picsum.photos/seed/21/500/400',
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context, url, downloadProgress) {
+                    return Center(
+                      child: SizedBox(
+                        height: size20.w,
+                        width: size20.w,
+                        child: CircularProgressIndicator(value: downloadProgress.progress),
+                      ),
+                    );
+                  },
+                  errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
+                ),
               ),
             ),
           ),
@@ -270,28 +267,7 @@ class EventDetailsScreen extends ConsumerWidget {
                     },
                     child: Row(
                       children: [
-                        CachedNetworkImage(
-                          progressIndicatorBuilder: (context, url, downloadProgress) {
-                            return CircleAvatar( // or
-                              backgroundColor: getFadedBgColor(context),
-                              radius: size20.r,// any widget that use imageProvider like (PhotoView)
-                              child: SizedBox(
-                                height: size10.w,
-                                width: size10.w,
-                                child: CircularProgressIndicator(value: downloadProgress.progress),
-                              )
-                            );
-                          },
-                          errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
-                          fit: BoxFit.cover,
-                          imageUrl: 'https://picsum.photos/200',
-                          imageBuilder: (context, imageProvider) { // you can access to imageProvider
-                            return CircleAvatar( // or
-                              radius: size20.r,// any widget that use imageProvider like (PhotoView)
-                              backgroundImage: imageProvider,
-                            );
-                          },
-                        ),
+                        const ProfileImageWidget(imageUrl: 'https://picsum.photos/200'),
                         SizedBox(width: size10.w),
                         Expanded(
                           child: Column(

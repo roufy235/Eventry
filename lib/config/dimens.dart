@@ -1,7 +1,10 @@
 
 const double size300 = 300.0;
+const double size250 = 250.0;
 const double size125 = 125.0;
 const double size100 = 100.0;
+const double size90 = 90.0;
+const double size80 = 80.0;
 const double size70 = 70.0;
 const double size60 = 60.0;
 const double size50 = 50.0;
