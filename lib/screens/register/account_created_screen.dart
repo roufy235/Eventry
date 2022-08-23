@@ -1,10 +1,10 @@
-import 'package:eventry/config/functions.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:flutter/material.dart';
 import 'package:eventry/router/router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:eventry/config/config.dart';
 
 class AccountCreatedScreen extends StatelessWidget {
   const AccountCreatedScreen({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class AccountCreatedScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: SvgPicture.asset('assets/images/success.svg',
+              child: SvgPicture.asset(successSvgImage,
                 width: 150.w,
                 height: 150.w,
               ),

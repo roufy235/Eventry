@@ -15,6 +15,9 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.eventDetails: return 'eventDetails';
       case AppScreens.eventDetailsDiscussion: return 'eventDetailsDiscussion';
       case AppScreens.eventOrganizerProfile: return 'eventOrganizerProfile';
+      case AppScreens.checkout: return 'checkout';
+      case AppScreens.checkoutPayment: return 'checkoutPayment';
+      case AppScreens.generateTicket: return 'generateTicket';
     }
   }
 
@@ -32,6 +35,9 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.eventDetails: return 'eventDetails';
       case AppScreens.eventDetailsDiscussion: return 'eventDetailsDiscussion';
       case AppScreens.eventOrganizerProfile: return 'eventOrganizerProfile';
+      case AppScreens.checkout: return 'checkout';
+      case AppScreens.checkoutPayment: return 'checkoutPayment';
+      case AppScreens.generateTicket: return 'generateTicket';
     }
   }
 }

@@ -2,9 +2,12 @@ import 'package:eventry/resource/hive_repository.dart';
 import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/screens/bookmark/bookmark_screen.dart';
+import 'package:eventry/screens/checkout/checkout_screen.dart';
+import 'package:eventry/screens/checkout/payment_screen.dart';
 import 'package:eventry/screens/event_details/event_details_screen.dart';
 import 'package:eventry/screens/event_details/organizer_profile_screen.dart';
 import 'package:eventry/screens/event_details/particpant_discussion_screen.dart';
+import 'package:eventry/screens/event_ticket/generate_ticket_screen.dart';
 import 'package:eventry/screens/featured/featured_screen.dart';
 import 'package:eventry/screens/home/home_screen.dart';
 import 'package:eventry/screens/interest/interest_screen.dart';
@@ -28,6 +31,11 @@ class AppRouter {
             path: '/${AppScreens.onboarding.toPath}',
             name: AppScreens.onboarding.toName,
             builder: (BuildContext context, GoRouterState state) => const OnboardingScreen(),
+        ),
+        GoRoute(
+            path: '/${AppScreens.generateTicket.toPath}',
+            name: AppScreens.generateTicket.toName,
+            builder: (BuildContext context, GoRouterState state) => const GenerateTicketScreen(),
         ),
         GoRoute(
           path: '/${AppScreens.login.toPath}',
@@ -85,6 +93,18 @@ class AppRouter {
                     path: AppScreens.eventOrganizerProfile.toPath,
                     name: AppScreens.eventOrganizerProfile.toName,
                     builder: (BuildContext context, GoRouterState state) => const OrganizerProfileScreen()
+                ),
+                GoRoute(
+                    path: AppScreens.checkout.toPath,
+                    name: AppScreens.checkout.toName,
+                    builder: (BuildContext context, GoRouterState state) => const CheckoutScreen(),
+                  routes: [
+                    GoRoute(
+                        path: AppScreens.checkoutPayment.toPath,
+                        name: AppScreens.checkoutPayment.toName,
+                        builder: (BuildContext context, GoRouterState state) => const PaymentScreen()
+                    ),
+                  ]
                 ),
               ]
             )

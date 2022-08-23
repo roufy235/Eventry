@@ -11,4 +11,7 @@ enum AppScreens {
   eventDetails,
   eventDetailsDiscussion,
   eventOrganizerProfile,
+  checkout,
+  checkoutPayment,
+  generateTicket,
 }

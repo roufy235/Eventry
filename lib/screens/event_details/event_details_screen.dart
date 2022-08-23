@@ -375,7 +375,9 @@ class EventDetailsScreen extends ConsumerWidget {
               SizedBox(width: size15.w),
               Expanded(
                 child: BtnElevated(
-                  onPressed: () {  },
+                  onPressed: () {
+                    context.go('/${AppScreens.home.toPath}/${AppScreens.eventDetails.toPath}/${AppScreens.checkout.toPath}');
+                  },
                   child: const Text('Buy Ticket'),
                 ),
               )

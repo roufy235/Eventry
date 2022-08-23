@@ -36,3 +36,10 @@ Color getTextColor(BuildContext context) {
   }
   return brandColorD;
 }
+
+Color getQRCodeBgColor(BuildContext context) {
+  if (Theme.of(context).brightness == Brightness.light) {
+    return colorWhite;
+  }
+  return brandColorD;
+}
