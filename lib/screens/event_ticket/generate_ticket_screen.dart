@@ -1,8 +1,10 @@
+import 'package:eventry/router/router.dart';
 import 'package:eventry/widgets/btn_elevated.dart';
 import 'package:eventry/widgets/btn_outlined.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:eventry/config/config.dart';
+import 'package:go_router/go_router.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class GenerateTicketScreen extends StatelessWidget {
@@ -108,7 +110,7 @@ class GenerateTicketScreen extends StatelessWidget {
               Expanded(
                 child: BtnOutlined(
                     child: const Text('Close'),
-                    onPressed: () {}
+                    onPressed: () => context.go('/${AppScreens.home.toPath}')
                 ),
               )
             ],
