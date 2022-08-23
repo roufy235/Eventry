@@ -8,4 +8,6 @@ enum AppScreens {
   notification,
   bookmark,
   featured,
+  eventDetails,
+  eventDetailsDiscussion,
 }

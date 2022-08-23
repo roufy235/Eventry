@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eventry/widgets/btn_outlined.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:eventry/config/config.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class EventListHorBoxWidget extends StatelessWidget {
   final String imageLink;
@@ -26,8 +28,19 @@ class EventListHorBoxWidget extends StatelessWidget {
                       topLeft: Radius.circular(size12.r),
                       bottomLeft: Radius.circular(size12.r),
                     ),
-                    child: Image.network(imageLink,
+                    child: CachedNetworkImage(
+                      imageUrl: imageLink,
                       fit: BoxFit.cover,
+                      progressIndicatorBuilder: (context, url, downloadProgress) {
+                        return Center(
+                          child: SizedBox(
+                            height: size20.w,
+                            width: size20.w,
+                            child: CircularProgressIndicator(value: downloadProgress.progress),
+                          ),
+                        );
+                      },
+                      errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
                     ),
                   ),
                 ),
@@ -84,7 +97,7 @@ class EventListHorBoxWidget extends StatelessWidget {
                   BtnOutlined(
                       btnHeight: size15.h,
                       btnRadius: size38,
-                      btnWidth: size45.w,
+                      useFlexibleWith: true,
                       child: Text('music',
                         style: TextStyle(fontSize: 8.sp),
                         maxLines: 1,

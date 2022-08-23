@@ -12,6 +12,8 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.notification: return 'notification';
       case AppScreens.bookmark: return 'bookmark';
       case AppScreens.featured: return 'featured';
+      case AppScreens.eventDetails: return 'eventDetails';
+      case AppScreens.eventDetailsDiscussion: return 'eventDetailsDiscussion';
     }
   }
 
@@ -26,6 +28,8 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.notification: return 'notification';
       case AppScreens.bookmark: return 'bookmark';
       case AppScreens.featured: return 'featured';
+      case AppScreens.eventDetails: return 'eventDetails';
+      case AppScreens.eventDetailsDiscussion: return 'eventDetailsDiscussion';
     }
   }
 }

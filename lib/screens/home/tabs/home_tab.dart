@@ -181,7 +181,7 @@ class HomeTab extends StatelessWidget {
                             itemBuilder: (BuildContext ctx, int index) {
                               return BtnOutlined(
                                   btnRadius: size38,
-                                  btnWidth: size60.w,
+                                  useFlexibleWith: true,
                                   child: Text(
                                       cates[index].text,
                                     maxLines: 1,

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BtnOutlined extends StatelessWidget {
   final Widget child;
+  final bool useFlexibleWith;
   final VoidCallback? onPressed;
   final double btnHeight, btnWidth, btnRadius;
   const BtnOutlined({
@@ -11,6 +12,7 @@ class BtnOutlined extends StatelessWidget {
     required this.child,
     this.btnRadius = defaultBtnRadius,
     this.btnHeight = size38,
+    this.useFlexibleWith = false,
     this.btnWidth = double.infinity,
     required this.onPressed
   }) : super(key: key);
@@ -19,7 +21,7 @@ class BtnOutlined extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: btnHeight.h,
-      width: btnWidth.w,
+      width: useFlexibleWith == true ? null : btnWidth.w,
       child: OutlinedButton(
           style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
