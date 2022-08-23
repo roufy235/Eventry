@@ -3,6 +3,7 @@ import 'package:eventry/router/app_screens.dart';
 import 'package:eventry/router/app_screens_ext.dart';
 import 'package:eventry/screens/bookmark/bookmark_screen.dart';
 import 'package:eventry/screens/event_details/event_details_screen.dart';
+import 'package:eventry/screens/event_details/organizer_profile_screen.dart';
 import 'package:eventry/screens/event_details/particpant_discussion_screen.dart';
 import 'package:eventry/screens/featured/featured_screen.dart';
 import 'package:eventry/screens/home/home_screen.dart';
@@ -79,6 +80,11 @@ class AppRouter {
                     path: AppScreens.eventDetailsDiscussion.toPath,
                     name: AppScreens.eventDetailsDiscussion.toName,
                     builder: (BuildContext context, GoRouterState state) => const ParticipantDiscussionScreen()
+                ),
+                GoRoute(
+                    path: AppScreens.eventOrganizerProfile.toPath,
+                    name: AppScreens.eventOrganizerProfile.toName,
+                    builder: (BuildContext context, GoRouterState state) => const OrganizerProfileScreen()
                 ),
               ]
             )

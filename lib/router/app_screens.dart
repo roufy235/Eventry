@@ -10,4 +10,5 @@ enum AppScreens {
   featured,
   eventDetails,
   eventDetailsDiscussion,
+  eventOrganizerProfile,
 }

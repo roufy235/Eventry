@@ -14,6 +14,7 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.featured: return 'featured';
       case AppScreens.eventDetails: return 'eventDetails';
       case AppScreens.eventDetailsDiscussion: return 'eventDetailsDiscussion';
+      case AppScreens.eventOrganizerProfile: return 'eventOrganizerProfile';
     }
   }
 
@@ -30,6 +31,7 @@ extension AppScreensExtension on AppScreens {
       case AppScreens.featured: return 'featured';
       case AppScreens.eventDetails: return 'eventDetails';
       case AppScreens.eventDetailsDiscussion: return 'eventDetailsDiscussion';
+      case AppScreens.eventOrganizerProfile: return 'eventOrganizerProfile';
     }
   }
 }

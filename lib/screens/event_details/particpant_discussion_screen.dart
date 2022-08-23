@@ -18,9 +18,7 @@ class ParticipantDiscussionScreen extends StatelessWidget {
         ),
       ),
       body: Column(
-        children: [
-
-        ],
+        children: [],
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(

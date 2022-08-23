@@ -26,14 +26,21 @@ class EventDetailsScreen extends ConsumerWidget {
           SliverAppBar(
             leading: IconButton(
               onPressed: () => context.pop(),
-              icon: Icon(Icons.arrow_back_ios, color: getBgColor(context)),
+              icon: const Icon(Icons.arrow_back_ios, color: colorWhite),
             ),
             pinned: true,
             toolbarHeight: AppBar().preferredSize.height,
             expandedHeight: 200.h,
-            backgroundColor: getTextColor(context),
+            backgroundColor: getEventDetailAppBarBgColor(context),
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text('Tech Conference'),
+              title: Text('Tech Conference',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.headline5!.copyWith(
+                  color: colorWhite,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
               background: Stack(
                 children: [
                   SizedBox(
@@ -257,68 +264,73 @@ class EventDetailsScreen extends ConsumerWidget {
                     ],
                   ),
                   SizedBox(height: size15.h),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CachedNetworkImage(
-                        progressIndicatorBuilder: (context, url, downloadProgress) {
-                          return CircleAvatar( // or
-                            backgroundColor: getFadedBgColor(context),
-                            radius: size20.r,// any widget that use imageProvider like (PhotoView)
-                            child: SizedBox(
-                              height: size10.w,
-                              width: size10.w,
-                              child: CircularProgressIndicator(value: downloadProgress.progress),
-                            )
-                          );
-                        },
-                        errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
-                        fit: BoxFit.cover,
-                        imageUrl: 'https://picsum.photos/200',
-                        imageBuilder: (context, imageProvider) { // you can access to imageProvider
-                          return CircleAvatar( // or
-                            radius: size20.r,// any widget that use imageProvider like (PhotoView)
-                            backgroundImage: imageProvider,
-                          );
-                        },
-                      ),
-                      SizedBox(width: size10.w),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Augustina Mayowa',
-                              style: Theme.of(context).textTheme.headline6!.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: size13.sp
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Text('Organizer',
-                              style: Theme.of(context).textTheme.bodySmall,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+                  InkWell(
+                    onTap: () {
+                      context.go('/${AppScreens.home.toPath}/${AppScreens.eventDetails.toPath}/${AppScreens.eventOrganizerProfile.toPath}');
+                    },
+                    child: Row(
+                      children: [
+                        CachedNetworkImage(
+                          progressIndicatorBuilder: (context, url, downloadProgress) {
+                            return CircleAvatar( // or
+                              backgroundColor: getFadedBgColor(context),
+                              radius: size20.r,// any widget that use imageProvider like (PhotoView)
+                              child: SizedBox(
+                                height: size10.w,
+                                width: size10.w,
+                                child: CircularProgressIndicator(value: downloadProgress.progress),
+                              )
+                            );
+                          },
+                          errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
+                          fit: BoxFit.cover,
+                          imageUrl: 'https://picsum.photos/200',
+                          imageBuilder: (context, imageProvider) { // you can access to imageProvider
+                            return CircleAvatar( // or
+                              radius: size20.r,// any widget that use imageProvider like (PhotoView)
+                              backgroundImage: imageProvider,
+                            );
+                          },
                         ),
-                      ),
-                      SizedBox(width: size10.w),
-                      BtnOutlined(
-                          btnHeight: size18.h,
-                          btnRadius: size38,
-                          useFlexibleWith: true,
-                          child: Text('follow',
-                            style: TextStyle(fontSize: 8.sp, fontWeight: FontWeight.bold),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                        SizedBox(width: size10.w),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Augustina Mayowa',
+                                style: Theme.of(context).textTheme.headline6!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: size13.sp
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text('Organizer',
+                                style: Theme.of(context).textTheme.bodySmall,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
                           ),
-                          onPressed: () {}
-                      ),
-                    ],
+                        ),
+                        SizedBox(width: size10.w),
+                        BtnOutlined(
+                            btnHeight: size18.h,
+                            btnRadius: size38,
+                            useFlexibleWith: true,
+                            child: Text('follow',
+                              style: TextStyle(fontSize: 8.sp, fontWeight: FontWeight.bold),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            onPressed: () {}
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: size15.h),
+                  SizedBox(height: size10.h),
                   const Divider(),
+                  SizedBox(height: size10.h),
                   Text('About Event',
                     style: Theme.of(context).textTheme.headline6!.copyWith(
                         fontSize: size13.sp
@@ -330,8 +342,9 @@ class EventDetailsScreen extends ConsumerWidget {
                   Text(loremIpsum,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  SizedBox(height: size15.h),
+                  SizedBox(height: size10.h),
                   const Divider(),
+                  SizedBox(height: size10.h),
                   InkWell(
                     onTap: () {
                       context.go('/${AppScreens.home.toPath}/${AppScreens.eventDetails.toPath}/${AppScreens.eventDetailsDiscussion.toPath}');
@@ -345,9 +358,17 @@ class EventDetailsScreen extends ConsumerWidget {
                           vertical: size10.h,
                           horizontal: size20.w
                       ),
-                      child: const Text('Participant Discussion'),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Participant Discussion'),
+                          SizedBox(width: size8.w),
+                          const FaIcon(FontAwesomeIcons.commentDots)
+                        ],
+                      ),
                     ),
-                  )
+                  ),
+                  SizedBox(height: size20.h),
                 ],
               ),
             ),

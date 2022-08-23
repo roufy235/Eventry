@@ -22,6 +22,14 @@ Color getScaffoldColor(BuildContext context) {
   return brandColorDarkFaded;
 }
 
+Color getEventDetailAppBarBgColor(BuildContext context) {
+  if (Theme.of(context).brightness == Brightness.light) {
+    return brandColor;
+  }
+  return brandColorDarkFaded;
+}
+
+
 Color getTextColor(BuildContext context) {
   if (Theme.of(context).brightness == Brightness.light) {
     return brandColor;
