@@ -57,6 +57,7 @@ dependencies:
   google_sign_in: ^5.4.1
   qr_flutter: ^4.0.0
   flutter_launcher_icons: ^0.10.0
+  flutter_native_splash: ^2.2.8
 
 dev_dependencies:
   flutter_test:
