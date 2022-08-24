@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventry/models/featured_model.dart';
+import 'package:eventry/models/firebase/event_category_model.dart';
 import 'package:eventry/models/interest_model.dart';
 import 'package:eventry/resource/auth_methods.dart';
+import 'package:eventry/resource/firestore_methods.dart';
 import 'package:eventry/router/router.dart';
 import 'package:eventry/widgets/btn_outlined.dart';
 import 'package:eventry/widgets/click_icon.dart';
@@ -17,9 +20,11 @@ import 'package:go_router/go_router.dart';
 class HomeTab extends StatelessWidget {
   const HomeTab({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
+    print('hello');
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -170,32 +175,46 @@ class HomeTab extends StatelessWidget {
                     }
                   ),
                   SizedBox(height: size10.h),
-                  SizedBox(
-                    height: size30.h,
-                    child: Consumer(
-                        builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
-                          List<InterestModel> cates = ref.read(interestProvider.state).state;
-                          return ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: cates.length,
-                            itemBuilder: (BuildContext ctx, int index) {
-                              return BtnOutlined(
-                                  btnRadius: size38,
-                                  useFlexibleWith: true,
-                                  child: Text(
-                                      cates[index].text,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  onPressed: () {}
+                  Consumer(
+                      builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
+                        final  data = ref.watch(eventCategoriesProvider);
+                        return data.when(
+                            data: (List<EventCategoryModel> myData) {
+                              return SizedBox(
+                                height: size30.h,
+                                child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: myData.length,
+                                  itemBuilder: (BuildContext ctx, int index) {
+                                    return BtnOutlined(
+                                        btnRadius: size38,
+                                        useFlexibleWith: true,
+                                        child: Text(
+                                          myData[index].name.toString(),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        onPressed: () {}
+                                    );
+                                  },
+                                  separatorBuilder: (BuildContext context, int index) {
+                                    return SizedBox(width: size12.w);
+                                  },
+                                ),
                               );
                             },
-                            separatorBuilder: (BuildContext context, int index) {
-                              return SizedBox(width: size12.w);
+                            error: (error, stack) {
+                              return Text(error.toString());
                             },
-                          );
-                        }
-                    ),
+                            loading: () {
+                              return SizedBox(
+                                width: size20.w,
+                                height: size20.w,
+                                child: const CircularProgressIndicator(),
+                              );
+                            }
+                        );
+                      }
                   ),
                   SizedBox(height: size25.h),
                 ],
