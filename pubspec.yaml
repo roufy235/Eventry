@@ -56,6 +56,7 @@ dependencies:
   cloud_firestore: ^3.4.4
   google_sign_in: ^5.4.1
   qr_flutter: ^4.0.0
+  flutter_launcher_icons: ^0.10.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,12 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   hive_generator: ^1.1.3
   build_runner: ^2.2.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/launcher_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
