@@ -2,7 +2,7 @@ import 'package:eventry/models/featured_model.dart';
 import 'package:eventry/models/firebase/event_category_model.dart';
 import 'package:eventry/models/hive/user_data_hive.dart';
 import 'package:eventry/models/interest_model.dart';
-import 'package:eventry/resource/firestore_methods.dart';
+import 'package:eventry/providers/event_categories_state_notifier.dart';
 import 'package:eventry/resource/hive_repository.dart';
 import 'package:eventry/providers/interest_ids_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -63,8 +63,4 @@ final StateProvider featuredProvider = StateProvider<List<FeaturedModel>>((ref) 
   ];
 });
 
-
-final eventCategoriesProvider = FutureProvider<List<EventCategoryModel>>((ref) async {
-  final getAllCategories = await FirestoreMethods().getAllCategories();
-  return getAllCategories;
-});
+final eventCategoriesProvider = StateNotifierProvider<EventCategoriesStateNotifier, List<EventCategoryModel>>((ref) => EventCategoriesStateNotifier());

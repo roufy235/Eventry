@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventry/models/featured_model.dart';
 import 'package:eventry/models/firebase/event_category_model.dart';
-import 'package:eventry/models/interest_model.dart';
 import 'package:eventry/resource/auth_methods.dart';
 import 'package:eventry/resource/firestore_methods.dart';
 import 'package:eventry/router/router.dart';
@@ -17,14 +15,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:eventry/providers/providers.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends ConsumerWidget {
   const HomeTab({Key? key}) : super(key: key);
 
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<FeaturedModel> featured = ref.read(featuredProvider.state).state;
     ScreenUtil.init(context);
-    print('hello');
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -138,81 +135,77 @@ class HomeTab extends StatelessWidget {
                       clickText:'See all'
                   ),
                   SizedBox(height: size10.h),
-                  Consumer(
-                    builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
-                      final List<FeaturedModel> featured = ref.read(featuredProvider.state).state;
-                      return SizedBox(
-                        height: size125.h,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: featured.length > 3 ? 3 : featured.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return FeaturedBannerWidget(
-                              btnText: featured[index].btnText,
-                              imagePath: featured[index].imagePath,
-                              bannerName: featured[index].text,
-                              onPressed: () {},
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return SizedBox(width: size15.w);
-                          },
-                        ),
-                      );
-                    }
+                  SizedBox(
+                    height: size125.h,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: featured.length > 3 ? 3 : featured.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return FeaturedBannerWidget(
+                          btnText: featured[index].btnText,
+                          imagePath: featured[index].imagePath,
+                          bannerName: featured[index].text,
+                          onPressed: () {},
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(width: size15.w);
+                      },
+                    ),
                   ),
                   SizedBox(height: size15.h),
-                  Consumer(
-                    builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
-                      return headingRow(
-                          ctx: context,
-                          title:'Trending',
-                          onPressed: () {
-                            ref.read(bottomNavigationCurrentIndexProvider.notifier).state = 1;
-                          },
-                          clickText:'See all'
-                      );
-                    }
+                  headingRow(
+                      ctx: context,
+                      title:'Trending',
+                      onPressed: () {
+                        ref.read(bottomNavigationCurrentIndexProvider.notifier).state = 1;
+                      },
+                      clickText:'See all'
                   ),
                   SizedBox(height: size10.h),
-                  Consumer(
-                      builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
-                        final  data = ref.watch(eventCategoriesProvider);
-                        return data.when(
-                            data: (List<EventCategoryModel> myData) {
-                              return SizedBox(
-                                height: size30.h,
-                                child: ListView.separated(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: myData.length,
-                                  itemBuilder: (BuildContext ctx, int index) {
-                                    return BtnOutlined(
-                                        btnRadius: size38,
-                                        useFlexibleWith: true,
-                                        child: Text(
-                                          myData[index].name.toString(),
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        onPressed: () {}
-                                    );
-                                  },
-                                  separatorBuilder: (BuildContext context, int index) {
-                                    return SizedBox(width: size12.w);
-                                  },
-                                ),
+                  StreamBuilder(
+                      stream: FirestoreMethods().allEventsCategories,
+                      builder: (BuildContext ctx, AsyncSnapshot<dynamic> snapshot) {
+                          List<EventCategoryModel> responseData = [];
+                          if (!snapshot.hasData) {
+                            return SizedBox(
+                              width: size20.w,
+                              height: size20.w,
+                              child: const CircularProgressIndicator(),
+                            );
+                          }
+                          if (snapshot.error != null) {
+                            return const Center(child: Text('Some error occurred'));
+                          }
+                          final data = snapshot.data.docs;
+                          if (data.isNotEmpty) {
+                            data.forEach((element) {
+                              final value = element.data() as Map<String, dynamic>;
+                              responseData.add(EventCategoryModel.fromJson(value));
+                            });
+                            ref.read(eventCategoriesProvider.notifier).updateList = responseData;
+                          }
+                          return SizedBox(
+                          height: size30.h,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: responseData.length,
+                            itemBuilder: (BuildContext ctx, int index) {
+                              return BtnOutlined(
+                                  btnRadius: size38,
+                                  useFlexibleWith: true,
+                                  child: Text(
+                                    responseData[index].name.toString(),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  onPressed: () {}
                               );
                             },
-                            error: (error, stack) {
-                              return Text(error.toString());
+                            separatorBuilder: (BuildContext context, int index) {
+                              return SizedBox(width: size12.w);
                             },
-                            loading: () {
-                              return SizedBox(
-                                width: size20.w,
-                                height: size20.w,
-                                child: const CircularProgressIndicator(),
-                              );
-                            }
+                          ),
                         );
                       }
                   ),

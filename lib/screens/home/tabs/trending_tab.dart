@@ -1,4 +1,4 @@
-import 'package:eventry/models/interest_model.dart';
+import 'package:eventry/models/firebase/event_category_model.dart';
 import 'package:eventry/providers/state.dart';
 import 'package:eventry/widgets/appbar_with_one_action.dart';
 import 'package:eventry/widgets/btn_outlined.dart';
@@ -38,7 +38,7 @@ class TrendingTab extends ConsumerWidget {
               height: size30.h,
               child: Consumer(
                   builder: (BuildContext ctx, WidgetRef ref, Widget? child) {
-                    List<InterestModel> cates = ref.read(interestProvider.state).state;
+                    List<EventCategoryModel> cates = ref.read(eventCategoriesProvider.notifier).getDate;
                     return ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: cates.length,
@@ -47,7 +47,7 @@ class TrendingTab extends ConsumerWidget {
                             btnRadius: size38,
                             useFlexibleWith: true,
                             child: Text(
-                              cates[index].text,
+                              cates[index].name.toString(),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
