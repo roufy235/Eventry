@@ -29,3 +29,4 @@ const String passwordErr = 'password is required';
 // firebase firestore collection names
 const String userCollectionName = 'users';
 const String eventCategoriesCollectionName = 'event_categories';
+const String eventsCollectionName = 'events';

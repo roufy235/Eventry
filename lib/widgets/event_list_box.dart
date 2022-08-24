@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eventry/models/firebase/events_model.dart';
 import 'package:eventry/router/router.dart';
 import 'package:eventry/widgets/btn_outlined.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +8,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:eventry/config/config.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class EventListBoxWidget extends StatelessWidget {
-  final String imageLink;
-  const EventListBoxWidget({Key? key, required this.imageLink}) : super(key: key);
+  final EventsModel singleEvent;
+  const EventListBoxWidget({
+    Key? key,
+    required this.singleEvent,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DateTime dt = (singleEvent.eventDate as Timestamp).toDate();
+    String dayMonth = DateFormat('dd yyyy').format(dt);
     ScreenUtil.init(context);
     return Container(
       decoration: BoxDecoration(
@@ -23,7 +31,7 @@ class EventListBoxWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () => context.go('/${AppScreens.home.toPath}/${AppScreens.eventDetails.toPath}?eventImageName=$imageLink'),
+            onTap: () => context.go('/${AppScreens.home.toPath}/${AppScreens.eventDetails.toPath}?eventImageName=${singleEvent.imagePath.toString()}'),
             child: Stack(
               children: [
                 Positioned(
@@ -35,7 +43,7 @@ class EventListBoxWidget extends StatelessWidget {
                         topRight: Radius.circular(size12.r),
                       ),
                       child: CachedNetworkImage(
-                        imageUrl: imageLink,
+                        imageUrl: singleEvent.imagePath.toString(),
                         fit: BoxFit.cover,
                         progressIndicatorBuilder: (context, url, downloadProgress) {
                           return Center(
@@ -63,7 +71,7 @@ class EventListBoxWidget extends StatelessWidget {
                           horizontal: size10.w,
                           vertical: size5.w
                       ),
-                      child: Text('17 Dec',
+                      child: Text(dayMonth,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: colorWhite
                         ),
@@ -74,7 +82,7 @@ class EventListBoxWidget extends StatelessWidget {
             ),
           ),
           SizedBox(height: size8.h),
-          Text('Tech Conference',
+          Text(singleEvent.title.toString(),
             style: Theme.of(context).textTheme.bodyLarge,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -116,7 +124,7 @@ class EventListBoxWidget extends StatelessWidget {
                         size: 12.sp,
                       ),
                       SizedBox(width: size5.w),
-                      Text('Eko Hotel',
+                      Text(singleEvent.location.toString(),
                         style: Theme.of(context).textTheme.bodyLarge,
                       )
                     ],

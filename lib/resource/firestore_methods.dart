@@ -7,10 +7,13 @@ class FirestoreMethods {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   late CollectionReference _userCollectionRef;
   late CollectionReference _eventCategoriesCollectionRef;
+  late CollectionReference _eventsCollectionRef;
 
   Stream get allEventsCategories => _eventCategoriesCollectionRef.orderBy('name').snapshots();
+  Stream get getAllEvents => _eventsCollectionRef.orderBy('event_date').snapshots();
 
   FirestoreMethods() {
+    _eventsCollectionRef = _firebaseFirestore.collection(eventsCollectionName);
     _userCollectionRef = _firebaseFirestore.collection(userCollectionName);
     _eventCategoriesCollectionRef = _firebaseFirestore.collection(eventCategoriesCollectionName);
   }
