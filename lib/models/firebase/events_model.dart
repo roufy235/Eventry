@@ -26,7 +26,7 @@ class EventsModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['about'] = about;
     data['event_date'] = eventDate;
     data['image_path'] = imagePath;

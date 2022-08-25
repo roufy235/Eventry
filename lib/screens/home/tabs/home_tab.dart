@@ -103,7 +103,7 @@ class HomeTab extends ConsumerWidget {
               slivers: [
                 SliverToBoxAdapter(
                   child: Column(
-                    children: [
+                    children: <Widget>[
                       SizedBox(height: size10.h),
                       Row(
                         children: [
@@ -188,10 +188,10 @@ class HomeTab extends ConsumerWidget {
                               }
                               final List<QueryDocumentSnapshot> data = snapshot.data.docs;
                               if (data.isNotEmpty) {
-                                data.forEach((element) {
+                                for (QueryDocumentSnapshot element in data) {
                                   final value = element.data() as Map<String, dynamic>;
                                   responseData.add(EventCategoryModel.fromJson(value));
-                                });
+                                }
                                 ref.read(eventCategoriesProvider.notifier).updateList = responseData;
                               }
                               return SizedBox(
